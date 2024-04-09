@@ -6,14 +6,14 @@
                 <div class="rose-mt-1 rose-bg4 rose-font-s2">洋果子后台管理系统</div>
             </div>
         </el-col>
-        <el-col :span="8" class="rose-bg-w rose-f-column rose-f-ijc ">
+        <el-col :span="8" class="rose-bg-w rose-f-column rose-f-ijc">
             <h2>欢迎回来</h2>
-            <div>
-                <span></span>
-                <span>账号密码登录</span>
-                <span></span>
+            <div class="rose-f-row rose-f-ijc rose-mt-1 rose-mb-1 rose-bg"> 
+                <span class="line rose-bg-g"></span>
+                <span class="rose-mr-1 rose-ml-1">账号密码登录</span>
+                <span class="line rose-bg-g"></span>
             </div>
-            <el-form :model="form" label-width="auto" style="max-width: 600px">
+            <el-form :model="form" label-width="auto">
                 <el-form-item>
                     <el-input v-model="form.username" placeholder="请输入用户名"/>
                 </el-form-item>
@@ -21,7 +21,7 @@
                     <el-input v-model="form.password" placeholder="请输入密码"/>
                 </el-form-item>
                 <el-form-item>
-                    <el-button type="primary" @click="onSubmit">登录</el-button>
+                    <el-button type="primary" @click="onSubmit" style="width: 192px;">登录</el-button>
                 </el-form-item>
             </el-form>
         </el-col>
@@ -41,5 +41,8 @@ const onSubmit = () => {
 
 </script>
 <style lang="less" scoped>
-
+.line{
+    height: 1px;
+    width: var(--common-split7);
+}
 </style>

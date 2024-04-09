@@ -1,6 +1,6 @@
 import { createRouter,createWebHashHistory } from 'vue-router'
 import Index from '@/pages/Index.vue'
-import About from '@/pages/About.vue'
+import Login from '@/pages/Login.vue'
 import NotFound from '@/pages/404.vue'
 
 const routes:any[] = [
@@ -9,12 +9,8 @@ const routes:any[] = [
         component:Index
     },
     {
-        path:'/about',
-        component:About
-    },
-    {
-        path:'/about',
-        component:About
+        path:'/login',
+        component:Login
     },
     { 
         path: '/:pathMatch(.*)*',

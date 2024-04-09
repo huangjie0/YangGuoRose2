@@ -1,79 +1,216 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+:root{
+    font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+    //白色
+    --rose-w:#FFFFFF;
+    //灰色
+    --rose-g1:#A9A9A9;
+    //红色
+    --rose-red:#FF0000;
+    //淡浅灰色
+    --rose-g2:#f2f8f8;
+     //浅灰色
+     --rose-g3:#faf4f4;
+     --rose-g5:#bebaba;
+     //深灰色
+     --rose-g4:#464646;
+    //主题紫色
+    --rose-p:#a781ee;
+    //浅紫色
+    --rose-p1:#bfa5ee;
+    //淡浅紫色
+    --rose-p2:#d1bff0;
+    --rose-p3:#ddd2f0;
+    //粉色
+    --rose-r1:#fda7b5;
+    --rose-r2:#ffb7c3;
+    //公共边距
+    --common-split:20px;
+    --common-split2:25px;
+    --common-split3:30px;
+    --common-split4:1px;
+    --common-split5:10px;
+    --common-split6:15px;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
+//公共的样式
+* {
   margin: 0;
+  padding: 0;
+}
+
+body{
+  background-color: var(--rose-g2);
+}
+
+//flex居中
+.rose-f-c {
   display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+//flex方向确定
+.rose-f-row {
+  display: flex;
+  flex-direction: row;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
+.rose-f-w{
+  flex-wrap: wrap;
+}
+
+.rose-f-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.rose-f-1 {
+  flex: 1;
+}
+
+.rose-w-h-100 {
+  width: 100%;
+  height: 100%;
+}
+
+.rose-p-r{
+  position: relative;
+}
+
+.rose-p-a{
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+
+.rose-p-a-0{
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+}
+
+.rose-f1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.rose-f2 {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.rose-overflow-y{
+  overflow:auto;
+}
+
+.rose-overflow-x{
+  overflow:auto;
+}
+
+.rose-text-overflow{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.rose-vh{
+    height: 100vh;
+}
+
+.rose-cursor{
   cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
 }
 
-.card {
-  padding: 2em;
+//公共颜色封装
+.rose-bg-w{
+    background-color: #FFFFFF;
 }
 
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+.rose-bg{
+  color: #A9A9A9;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+.rose-bg2{
+  color: #818181;
+}
+
+.rose-bg3{
+  color: var(--rose-p);
+}
+
+.rose-bg-p{
+    background-color: rgb(167, 129, 238);
+}
+
+.roser-bg-p2{
+  background-color:var(--rose-p1) ;
+}
+
+.rose-font-red{
+  color: #FF0000;
+}
+
+.rose-bg-p1{
+  background-color: var(--rose-p3);
+}
+
+//字体的粗细封装
+.rose-font-w1{
+  font-weight: 500;
+}
+
+.rose-font-w2{
+  font-weight: 550;
+}
+.rose-font-w3{
+  font-weight: lighter;
+}
+//字体大小
+.rose-font-s1{
+  font-size: 30px;
+}
+
+.rose-font-s2{
+  font-size: 20px;
+}
+
+.rose-font-s3{
+  font-size: 15px;
+}
+
+//公共圆角设置
+.rose-br-s1{
+  border-radius: 5px;
+}
+
+//公共边框值
+.rose-b{
+  border: 1px solid var(--rose-p);
+}
+
+.rose-ml-a{
+  margin-left: auto;
+}
+
+.rose-mr-a{
+  margin-right: auto;
+}
+
+.rose-ml-1{
+  margin-left:10px;
+}
+
+.rose-mt-1{
+  margin-top: 10px;
+}
+
+.rose-mr-1{
+  margin-right:10px;
+}
+
+.rose-z-index{
+  z-index: 100;
 }

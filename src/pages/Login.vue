@@ -38,6 +38,7 @@
 <script lang="ts" setup>
 import { reactive,ref } from 'vue'
 import type { FormInstance, FormRules } from 'element-plus'
+import { login } from '@/api/manager.ts'
 
 interface Params {
     username:string,
@@ -72,7 +73,9 @@ const onSubmit = async (formEl: FormInstance | undefined) => {
     if(!formEl) return
     await formEl.validate((valid:any)=>{
         if(!valid) return
-        console.log('通过');
+        login(form.username,form.password).then((res:any) => {
+            console.log(res);
+        })
     })
 }
 

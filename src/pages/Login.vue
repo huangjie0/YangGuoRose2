@@ -13,38 +13,67 @@
                 <span class="rose-mr-1 rose-ml-1">账号密码登录</span>
                 <span class="line rose-bg-g"></span>
             </div>
-            <el-form :model="form">
-                <el-form-item>
+            <el-form :model="form" :rules="rules" ref="formRef">
+                <el-form-item prop="username">
                     <el-input v-model="form.username" placeholder="请输入用户名">
                         <template #prefix>
                             <el-icon class="el-input__icon"><User /></el-icon>
                         </template>
                     </el-input>
                 </el-form-item>
-                <el-form-item>
-                    <el-input v-model="form.password" placeholder="请输入密码">
+                <el-form-item prop="password">
+                    <el-input v-model="form.password" placeholder="请输入密码" type="password"  show-password>
                         <template #prefix>
                             <el-icon class="el-input__icon"><Lock /></el-icon>
                         </template>
                     </el-input>
                 </el-form-item>
                 <el-form-item>
-                    <el-button type="primary" @click="onSubmit" class="rose-w-h-100">登录</el-button>
+                    <el-button type="primary" @click="onSubmit(formRef)" class="rose-w-h-100">登录</el-button>
                 </el-form-item>
             </el-form>
         </el-col>
     </el-row>
 </template>
 <script lang="ts" setup>
-import { reactive } from 'vue'
+import { reactive,ref } from 'vue'
+import type { FormInstance, FormRules } from 'element-plus'
 
-const form = reactive<any>({
+interface Params {
+    username:string,
+    password:string
+}
+
+const form = reactive<Params>({
     username:'',
     password:''
 })
 
-const onSubmit = () => {
-  console.log("11111")
+const formRef = ref<FormInstance>()
+
+const rules = reactive<FormRules<Params>>({
+    username:[
+        {
+            required: true,
+            message:'用户名不能为空',
+            trigger: 'blur'
+        }
+    ],
+    password:[
+        {
+            message:'密码不能为空',
+            required: true,
+            trigger: 'blur'
+        }
+    ]
+})
+
+const onSubmit = async (formEl: FormInstance | undefined) => {
+    if(!formEl) return
+    await formEl.validate((valid:any)=>{
+        if(!valid) return
+        console.log('通过');
+    })
 }
 
 </script>

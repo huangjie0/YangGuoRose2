@@ -5,6 +5,7 @@ import 'element-plus/dist/index.css'
 import router from './router'
 import "./style.less"
 import "./elementui.less"
+import "lib-flexible-computer"
 
 const app = createApp(App)
 

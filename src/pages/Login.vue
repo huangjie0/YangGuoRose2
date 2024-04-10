@@ -1,12 +1,12 @@
 <template>
     <el-row class="rose-vh rose-bg-p">
-        <el-col :span="16" class="rose-f-row rose-f-ijc">
+        <el-col :lg="16" :md="12" class="rose-f-row rose-f-ijc">
             <div>
                 <div class="rose-font-w2 rose-font-s4 rose-bg4">欢迎光临</div>
                 <div class="rose-mt-1 rose-bg4 rose-font-s2">洋果子后台管理系统</div>
             </div>
         </el-col>
-        <el-col :span="8" class="rose-bg-w rose-f-column rose-f-ijc">
+        <el-col :lg="8" :md="12" class="rose-bg-w rose-f-column rose-f-ijc">
             <h2>欢迎回来</h2>
             <div class="rose-f-row rose-f-ijc rose-mt-1 rose-mb-1 rose-bg"> 
                 <span class="line rose-bg-g"></span>
@@ -15,10 +15,18 @@
             </div>
             <el-form :model="form" label-width="auto">
                 <el-form-item>
-                    <el-input v-model="form.username" placeholder="请输入用户名"/>
+                    <el-input v-model="form.username" placeholder="请输入用户名">
+                        <template #prefix>
+                            <i class="el-input__icon el-icon-search"></i>
+                        </template>
+                    </el-input>
                 </el-form-item>
                 <el-form-item>
-                    <el-input v-model="form.password" placeholder="请输入密码"/>
+                    <el-input v-model="form.password" placeholder="请输入密码">
+                        <template #prefix>
+                            <i class="el-input__icon el-icon-search"></i>
+                        </template>
+                    </el-input>
                 </el-form-item>
                 <el-form-item>
                     <el-button type="primary" @click="onSubmit" style="width: 192px;">登录</el-button>
@@ -36,7 +44,7 @@ const form = reactive<any>({
 })
 
 const onSubmit = () => {
-  console.log('submit!')
+  console.log("11111")
 }
 
 </script>

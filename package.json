@@ -12,6 +12,9 @@
     "element-plus": "^2.6.3",
     "less": "^4.2.0",
     "less-loader": "^12.2.0",
+    "lib-flexible-computer": "^1.0.2",
+    "postcss-px2rem": "^0.3.0",
+    "px2rem-loader": "^0.1.9",
     "vue": "^3.4.21",
     "vue-router": "^4.3.0"
   },

@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { resolve } from 'path'
+import px2rem from "postcss-px2rem"
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -11,6 +12,13 @@ export default defineConfig({
   },
   plugins: [vue()],
   css:{
+    postcss:{
+      plugins:[
+        px2rem({
+          remUnit:192
+        })
+      ]
+    },
     preprocessorOptions: {
       less: {
         math: "always", // 括号内才使用数学计算
@@ -22,3 +30,4 @@ export default defineConfig({
     }
   }
 })
+

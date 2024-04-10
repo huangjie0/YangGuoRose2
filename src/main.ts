@@ -6,9 +6,13 @@ import router from './router'
 import "./style.less"
 import "./elementui.less"
 import "lib-flexible-computer"
+import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 
 const app = createApp(App)
 
 app.use(ElementPlus)
 app.use(router)
+for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
+    app.component(key, component)
+  }
 app.mount('#app')

@@ -13,23 +13,23 @@
                 <span class="rose-mr-1 rose-ml-1">账号密码登录</span>
                 <span class="line rose-bg-g"></span>
             </div>
-            <el-form :model="form" label-width="auto">
+            <el-form :model="form">
                 <el-form-item>
                     <el-input v-model="form.username" placeholder="请输入用户名">
                         <template #prefix>
-                            <i class="el-input__icon el-icon-search"></i>
+                            <el-icon class="el-input__icon"><User /></el-icon>
                         </template>
                     </el-input>
                 </el-form-item>
                 <el-form-item>
                     <el-input v-model="form.password" placeholder="请输入密码">
                         <template #prefix>
-                            <i class="el-input__icon el-icon-search"></i>
+                            <el-icon class="el-input__icon"><Lock /></el-icon>
                         </template>
                     </el-input>
                 </el-form-item>
                 <el-form-item>
-                    <el-button type="primary" @click="onSubmit" style="width: 192px;">登录</el-button>
+                    <el-button type="primary" @click="onSubmit" class="rose-w-h-100">登录</el-button>
                 </el-form-item>
             </el-form>
         </el-col>

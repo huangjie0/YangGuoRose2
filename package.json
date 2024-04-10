@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@vueuse/integrations": "^10.9.0",
     "axios": "^1.6.8",
     "element-plus": "^2.6.3",
     "less": "^4.2.0",
@@ -16,6 +17,7 @@
     "lib-flexible-computer": "^1.0.2",
     "postcss-px2rem": "^0.3.0",
     "px2rem-loader": "^0.1.9",
+    "universal-cookie": "^6.1.3",
     "vue": "^3.4.21",
     "vue-router": "^4.3.0"
   },

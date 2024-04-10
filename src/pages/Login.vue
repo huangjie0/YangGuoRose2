@@ -39,6 +39,9 @@
 import { reactive,ref } from 'vue'
 import type { FormInstance, FormRules } from 'element-plus'
 import { login } from '@/api/manager.ts'
+import { ElNotification } from 'element-plus'
+import { useRouter } from 'vue-router'
+import { useCookies } from '@vueuse/integrations/useCookies'
 
 interface Params {
     username:string,
@@ -49,6 +52,8 @@ const form = reactive<Params>({
     username:'',
     password:''
 })
+
+const router = useRouter()
 
 const formRef = ref<FormInstance>()
 
@@ -75,6 +80,16 @@ const onSubmit = async (formEl: FormInstance | undefined) => {
         if(!valid) return
         login(form.username,form.password).then((res:any) => {
             console.log(res);
+            const cookie = useCookies()
+            cookie.set("admin-token",res.data.data.token)
+
+            router.push('/')
+        }).catch((err:any)=>{
+            ElNotification({
+                message: err.response.data.msg || "请求失败",
+                type:'error',
+                duration:3000
+            })
         })
     })
 }

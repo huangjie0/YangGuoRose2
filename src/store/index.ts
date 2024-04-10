@@ -12,10 +12,10 @@ const useUserStore = defineStore('userInfo', {
     },
     actions: {
       setUserInfo(user:object) {
-            this.user = user
+        this.user = user
       },
       getInfo(){
-        
+
       }
     }
 })

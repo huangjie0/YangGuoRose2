@@ -29,7 +29,7 @@
                     </el-input>
                 </el-form-item>
                 <el-form-item>
-                    <el-button type="primary" @click="onSubmit(formRef)" class="rose-w-h-100">登录</el-button>
+                    <el-button type="primary" :loading="loading" @click="onSubmit(formRef)" class="rose-w-h-100">登录</el-button>
                 </el-form-item>
             </el-form>
         </el-col>
@@ -38,10 +38,12 @@
 <script lang="ts" setup>
 import { reactive,ref } from 'vue'
 import type { FormInstance, FormRules } from 'element-plus'
-import { login } from '@/api/manager.ts'
-import { ElNotification } from 'element-plus'
+import { login,getInfo } from '@/api/manager.ts'
 import { useRouter } from 'vue-router'
-import { useCookies } from '@vueuse/integrations/useCookies'
+import { setToken } from '@/composables/auth.ts'
+import { toast } from '@/composables/util.ts'
+import useUserStore from "@/store/index.ts";
+
 
 interface Params {
     username:string,
@@ -54,6 +56,8 @@ const form = reactive<Params>({
 })
 
 const router = useRouter()
+const userStore = useUserStore();
+const loading = ref(false)
 
 const formRef = ref<FormInstance>()
 
@@ -78,18 +82,16 @@ const onSubmit = async (formEl: FormInstance | undefined) => {
     if(!formEl) return
     await formEl.validate((valid:any)=>{
         if(!valid) return
+        loading.value = true
         login(form.username,form.password).then((res:any) => {
-            console.log(res);
-            const cookie = useCookies()
-            cookie.set("admin-token",res.data.data.token)
-
-            router.push('/')
-        }).catch((err:any)=>{
-            ElNotification({
-                message: err.response.data.msg || "请求失败",
-                type:'error',
-                duration:3000
+            toast('登录成功！')
+            setToken(res.token)
+            getInfo().then((res2:any)=>{
+                userStore.setUserInfo(res2)  
             })
+            router.push('/')
+        }).finally(()=>{
+            loading.value = false
         })
     })
 }

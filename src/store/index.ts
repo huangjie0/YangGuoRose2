@@ -14,6 +14,9 @@ const useUserStore = defineStore('userInfo', {
       setUserInfo(user:object) {
             this.user = user
       },
+      getInfo(){
+        
+      }
     }
 })
 

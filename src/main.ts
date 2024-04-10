@@ -8,6 +8,7 @@ import "./elementui.less"
 import "lib-flexible-computer"
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import { createPinia } from 'pinia'
+import '@/permission.ts'
 
 const pinia = createPinia()
 const app = createApp(App)

@@ -44,7 +44,6 @@ import { setToken } from '@/composables/auth.ts'
 import { toast } from '@/composables/util.ts'
 import useUserStore from "@/store/index.ts";
 
-
 interface Params {
     username:string,
     password:string

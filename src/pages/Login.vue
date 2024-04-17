@@ -36,13 +36,11 @@
     </el-row>
 </template>
 <script lang="ts" setup>
-import { reactive,ref } from 'vue'
+import { reactive,ref,onMounted,onBeforeUnmount } from 'vue'
 import type { FormInstance, FormRules } from 'element-plus'
-import { login } from '@/api/manager.ts'
-import { useRouter } from 'vue-router'
-import { setToken } from '@/composables/auth.ts'
-import { toast } from '@/composables/util.ts'
 import useUserStore from "@/store/index.ts";
+import { toast } from '@/composables/util.ts'
+import { useRouter } from 'vue-router'
 
 interface Params {
     username:string,
@@ -54,11 +52,11 @@ const form = reactive<Params>({
     password:''
 })
 
-const router = useRouter()
 const loading = ref(false)
+const userStore = useUserStore()
+const router = useRouter()
 
 const formRef = ref<FormInstance>()
-const userStore = useUserStore();
 
 const rules = reactive<FormRules<Params>>({
     username:[
@@ -82,15 +80,26 @@ const onSubmit = async (formEl: FormInstance | undefined) => {
     await formEl.validate((valid:any)=>{
         if(!valid) return
         loading.value = true
-        login(form.username,form.password).then((res:any) => {
+        userStore.userLogin(form.username,form.password).then(()=>{
             toast('登录成功！')
-            setToken(res.token)
-            userStore.getUserInfo()
             router.push('/')
         }).finally(()=>{
             loading.value = false
         })
     })
+}
+
+onMounted(()=>{
+    // 添加键盘监听
+    document.addEventListener("keyup",onKeyUp)
+})
+
+onBeforeUnmount(()=>{
+    document.removeEventListener("keyup",onKeyUp)
+})
+
+function onKeyUp(event:any){
+    if(event.key == "Enter") onSubmit(formRef.value)
 }
 
 </script>

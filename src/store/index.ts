@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
-import { getInfo } from "@/api/manager.ts"
-
+import { getInfo,login } from "@/api/manager.ts"
+import { setToken } from '@/composables/auth.ts'
 interface Type { 
     user: object | null
 }
@@ -12,6 +12,15 @@ const useUserStore = defineStore('userInfo', {
         }
     },
     actions: {
+      userLogin(username:string,password:string){
+        return new Promise((resolve,reject)=>{
+          login(username,password).then((res:any)=>{
+            setToken(res.token)
+            this.getUserInfo()
+            resolve(res)
+          }).catch((err:any)=>reject(err))
+        })
+      },
       setUserInfo(user:object) {
         this.user = user
       },

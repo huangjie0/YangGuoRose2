@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+import { getInfo } from "@/api/manager.ts"
 
 interface Type { 
     user: object | null
@@ -14,8 +15,10 @@ const useUserStore = defineStore('userInfo', {
       setUserInfo(user:object) {
         this.user = user
       },
-      getInfo(){
-
+      getUserInfo(){
+        getInfo().then((res:any)=>{
+          this.setUserInfo(res)
+        })
       }
     }
 })

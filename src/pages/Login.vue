@@ -38,7 +38,7 @@
 <script lang="ts" setup>
 import { reactive,ref } from 'vue'
 import type { FormInstance, FormRules } from 'element-plus'
-import { login,getInfo } from '@/api/manager.ts'
+import { login } from '@/api/manager.ts'
 import { useRouter } from 'vue-router'
 import { setToken } from '@/composables/auth.ts'
 import { toast } from '@/composables/util.ts'
@@ -55,10 +55,10 @@ const form = reactive<Params>({
 })
 
 const router = useRouter()
-const userStore = useUserStore();
 const loading = ref(false)
 
 const formRef = ref<FormInstance>()
+const userStore = useUserStore();
 
 const rules = reactive<FormRules<Params>>({
     username:[
@@ -85,9 +85,7 @@ const onSubmit = async (formEl: FormInstance | undefined) => {
         login(form.username,form.password).then((res:any) => {
             toast('登录成功！')
             setToken(res.token)
-            getInfo().then((res2:any)=>{
-                userStore.setUserInfo(res2)  
-            })
+            userStore.getUserInfo()
             router.push('/')
         }).finally(()=>{
             loading.value = false

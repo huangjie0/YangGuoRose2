@@ -90,7 +90,6 @@ const onSubmit = async (formEl: FormInstance | undefined) => {
 }
 
 onMounted(()=>{
-    // 添加键盘监听
     document.addEventListener("keyup",onKeyUp)
 })
 

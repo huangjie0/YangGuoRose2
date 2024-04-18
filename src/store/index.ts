@@ -12,8 +12,8 @@ const useUserStore = defineStore('userInfo', {
         }
     },
     actions: {
-      userLogin(username:string,password:string){
-        return new Promise((resolve,reject)=>{
+      userLogin( username:string , password:string ){
+        return new Promise((resolve:any,reject:any)=>{
           login(username,password).then((res:any)=>{
             setToken(res.token)
             this.getUserInfo()

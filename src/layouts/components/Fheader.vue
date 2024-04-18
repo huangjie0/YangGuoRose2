@@ -10,7 +10,7 @@
             <el-icon><FullScreen /></el-icon>
             <el-dropdown>
                 <span class="el-dropdown-link">
-                <el-avatar :size="25" :src="circleUrl" />
+                <el-avatar :size="25" :src="userStore.user.avatar" />
                 <el-icon class="el-icon--right">
                     <arrow-down />
                 </el-icon>
@@ -31,6 +31,9 @@
     </div>
 </template>
 <script lang="ts" setup>
+import useUserStore from "@/store/index.ts";
+
+const userStore = useUserStore()
 
 </script>
 <style lang="less">

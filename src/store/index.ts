@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { getInfo,login } from "@/api/manager.ts"
-import { setToken } from '@/composables/auth.ts'
+import { setToken,removeToken } from '@/composables/auth.ts'
 interface Type { 
     user: object | null
 }
@@ -28,6 +28,13 @@ const useUserStore = defineStore('userInfo', {
         getInfo().then((res:any)=>{
           this.setUserInfo(res)
         })
+      },
+      //退出登录
+      logout(){
+          //移除token
+          removeToken()
+          //清除当前用户状态
+          this.user = {}
       }
     }
 })

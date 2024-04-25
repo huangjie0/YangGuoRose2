@@ -19,7 +19,7 @@
                 <template #dropdown>
                 <el-dropdown-menu>
                     <el-dropdown-item>修改密码</el-dropdown-item>
-                    <el-dropdown-item>退出登录</el-dropdown-item>
+                    <el-dropdown-item @click="userLogOut">退出登录</el-dropdown-item>
                 </el-dropdown-menu>
                 </template>
             </el-dropdown>
@@ -28,8 +28,24 @@
 </template>
 <script lang="ts" setup>
 import useUserStore from "@/store/index.ts";
+import { logout } from '@/api/manager.ts';
+import { showModal , toast } from "@/composables/util.ts";
+import { useRouter } from "vue-router";
 
 const userStore = useUserStore()
+const router = useRouter()
+
+const userLogOut = ()=> {
+    showModal("是否要退出登录？").then((res:any)=>{
+        logout().finally(()=>{
+            userStore.logout()
+            //跳转到用户登录页 
+            router.push("/login")
+            //提示错误信息
+            toast("退出登录成功！")
+        })
+    })
+}
 
 </script>
 <style lang="less">

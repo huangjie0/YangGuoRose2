@@ -4,11 +4,15 @@
             <el-icon class="rose-mr-1"><Bicycle /></el-icon>
             <span class="rose-mr-1">洋果子Rose后台系统</span>
             <el-icon class="rose-mr-1 rose-cursor"><Fold /></el-icon>
-            <el-icon class="rose-mr-1 rose-cursor"><Refresh /></el-icon>
+            <el-tooltip effect="dark" content="刷新" placement="bottom">
+                <el-icon class="rose-mr-1 rose-cursor"><Refresh /></el-icon>
+            </el-tooltip>
         </span>
         <div class="rose-ml-a rose-f-row logo-right">
-            <el-icon class="rose-cursor rose-mr-1"><FullScreen /></el-icon>
-            <el-dropdown class="dropdown rose-bg4 rose-mr-1">
+            <el-tooltip effect="dark" content="全局" placement="bottom">
+                <el-icon class="rose-cursor rose-mr-1"><FullScreen /></el-icon>
+            </el-tooltip>
+            <el-dropdown class="dropdown rose-bg4 rose-mr-1" @command="handleCommand">
                 <span class="el-dropdown-link">
                 <el-avatar :size="25" :src="(userStore.user as any) ?.avatar" />
                 {{ (userStore.user as any) ?.username }}
@@ -17,10 +21,10 @@
                 </el-icon>
                 </span>
                 <template #dropdown>
-                <el-dropdown-menu>
-                    <el-dropdown-item>修改密码</el-dropdown-item>
-                    <el-dropdown-item @click="userLogOut">退出登录</el-dropdown-item>
-                </el-dropdown-menu>
+                    <el-dropdown-menu>
+                        <el-dropdown-item command="rePassword">修改密码</el-dropdown-item>
+                        <el-dropdown-item command="logOut">退出登录</el-dropdown-item>
+                    </el-dropdown-menu>
                 </template>
             </el-dropdown>
         </div>
@@ -45,6 +49,17 @@ const userLogOut = ()=> {
             toast("退出登录成功！")
         })
     })
+}
+
+const handleCommand = (v:string)=>{
+    switch (v) {
+        case "logOut":
+            userLogOut()
+            break;
+        case "rePassword":
+            console.log(1111);
+            break;
+    }
 }
 
 </script>

@@ -1,9 +1,10 @@
 import router from '@/router'
 import { getToken } from '@/composables/auth.ts'
-import { toast } from '@/composables/util.ts'
+import { toast,showFullLoading,hideFullLoading } from '@/composables/util.ts'
 import useUserStore from "@/store/index.ts"
 
-router.beforeEach((to,from,next) => {
+router.beforeEach((to:any,from:any,next:Function) => {
+    showFullLoading();
     const token = getToken()
     const userStore = useUserStore();
     if(!token && to.path !== '/login') {
@@ -21,4 +22,8 @@ router.beforeEach((to,from,next) => {
         userStore.getUserInfo()
     }
     next()
+})
+
+router.afterEach(()=>{
+    hideFullLoading()
 })

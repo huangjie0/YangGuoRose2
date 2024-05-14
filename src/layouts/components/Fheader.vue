@@ -10,8 +10,8 @@
             <el-icon class="rose-cursor rose-mr-1"><FullScreen /></el-icon>
             <el-dropdown class="dropdown rose-bg4 rose-mr-1">
                 <span class="el-dropdown-link">
-                <el-avatar :size="25" :src="userStore.user?.avatar" />
-                {{ userStore.user?.username }}
+                <el-avatar :size="25" :src="(userStore.user as any) ?.avatar" />
+                {{ (userStore.user as any) ?.username }}
                 <el-icon>
                     <arrow-down />
                 </el-icon>
@@ -36,7 +36,7 @@ const userStore = useUserStore()
 const router = useRouter()
 
 const userLogOut = ()=> {
-    showModal("是否要退出登录？").then((res:any)=>{
+    showModal("是否要退出登录？").then(()=>{
         logout().finally(()=>{
             userStore.logout()
             //跳转到用户登录页 

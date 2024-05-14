@@ -15,3 +15,7 @@ export function getInfo(){
     return axios.post("/admin/getinfo")
 }
 
+export function updatePassword(data:object){
+    return axios.post("/admin/updatepassword",data)
+}
+

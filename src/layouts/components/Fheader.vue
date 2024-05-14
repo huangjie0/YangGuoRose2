@@ -5,12 +5,15 @@
             <span class="rose-mr-1">洋果子Rose后台系统</span>
             <el-icon class="rose-mr-1 rose-cursor"><Fold /></el-icon>
             <el-tooltip effect="dark" content="刷新" placement="bottom">
-                <el-icon class="rose-mr-1 rose-cursor"><Refresh /></el-icon>
+                <el-icon class="rose-mr-1 rose-cursor" @click="handleRefresh"><Refresh /></el-icon>
             </el-tooltip>
         </span>
         <div class="rose-ml-a rose-f-row logo-right">
             <el-tooltip effect="dark" content="全局" placement="bottom">
-                <el-icon class="rose-cursor rose-mr-1"><FullScreen /></el-icon>
+                <el-icon class="rose-cursor rose-mr-1" @click="toggle">
+                    <FullScreen v-if="!isFullscreen"/>
+                    <Aim v-else/>
+                </el-icon>
             </el-tooltip>
             <el-dropdown class="dropdown rose-bg4 rose-mr-1" @command="handleCommand">
                 <span class="el-dropdown-link">
@@ -28,16 +31,23 @@
                 </template>
             </el-dropdown>
         </div>
+        <!-- 修改密码弹框 -->
+        <CommonDrawer ref="commonDrawer" title="修改密码"></CommonDrawer>
     </div>
 </template>
 <script lang="ts" setup>
+import { ref } from "vue";
 import useUserStore from "@/store/index.ts";
-import { logout } from '@/api/manager.ts';
+import { logout,updatePassword } from '@/api/manager.ts';
 import { showModal , toast } from "@/composables/util.ts";
 import { useRouter } from "vue-router";
+import { useFullscreen } from '@vueuse/core';
+import CommonDrawer from '@/components/CommonDrawer.vue'
 
 const userStore = useUserStore()
 const router = useRouter()
+const { isFullscreen, toggle } = useFullscreen()
+const commonDrawer = ref();
 
 const userLogOut = ()=> {
     showModal("是否要退出登录？").then(()=>{
@@ -51,19 +61,27 @@ const userLogOut = ()=> {
     })
 }
 
+const userRePassword = ()=>{
+    commonDrawer.value.open()
+}
+
 const handleCommand = (v:string)=>{
     switch (v) {
         case "logOut":
             userLogOut()
             break;
         case "rePassword":
-            console.log(1111);
+            userRePassword()
             break;
     }
 }
 
+const handleRefresh = ()=>{
+    location.reload()
+}
+
 </script>
-<style lang="less">
+<style lang="less" scoped>
 .f-header{
     height:64px;
     top:0;

@@ -21,6 +21,11 @@ router.beforeEach((to:any,from:any,next:Function) => {
     if(token){
         userStore.getUserInfo()
     }
+    
+    //设置页面标题
+    let title = "洋果子Rose系统" + (to.meta.title ?? "")
+    document.title = title
+
     next()
 })
 

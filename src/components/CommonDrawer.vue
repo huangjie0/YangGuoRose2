@@ -1,39 +1,26 @@
 <template>
     <el-drawer v-model="drawer" :title="title" :size="size" :close-on-click-modal="closeOnClickModal">
-        <el-form :model="form" :rules="rules" ref="formRef">
-            <el-form-item prop="username">
-                <el-input v-model="form.username" placeholder="请输入用户名">
-                    <template #prefix>
-                        <el-icon class="el-input__icon"><User /></el-icon>
-                    </template>
-                </el-input>
-            </el-form-item>
-            <el-form-item prop="password">
-                <el-input v-model="form.password" placeholder="请输入密码" type="password"  show-password>
-                    <template #prefix>
-                        <el-icon class="el-input__icon"><Lock /></el-icon>
-                    </template>
-                </el-input>
-            </el-form-item>
-            <el-form-item>
-                <el-button type="primary" :loading="loading" @click="onSubmit(formRef)" class="rose-w-h-100">登录</el-button>
-            </el-form-item>
-        </el-form>
+        <div class="rose-w-h-100 rose-p-r rose-f-column">
+            <div class="body rose-p-a-0 rose-f-1">
+                <el-scrollbar>
+                    <slot></slot>
+                </el-scrollbar>
+            </div>
+            <div class="actions rose-mt-a rose-f-row">
+                <el-button type="primary" >提交</el-button>
+                <el-button @click="close">取消</el-button>
+            </div>
+        </div>
     </el-drawer>
 </template>
 <script setup lang="ts">
-import { ref,reactive} from 'vue'
+import { ref } from 'vue'
 
 interface Params { 
     title:string;
     size?:string;
     closeOnClickModal?:boolean;
 }
-
-const form = reactive<Params>({
-    username:'',
-    password:''
-})
 
 withDefaults(defineProps<Params>(),{
     size:"45%",
@@ -59,5 +46,11 @@ defineExpose({
 
 </script>
 <style scoped lang="less">
-
+.body{
+    bottom: 50px;
+}
+.actions{
+    height: 50px;
+    align-items: center;
+}
 </style>

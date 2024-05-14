@@ -31,9 +31,13 @@
                 </template>
             </el-dropdown>
         </div>
-        <!-- 修改密码弹框 -->
-        <CommonDrawer ref="commonDrawer" title="修改密码"></CommonDrawer>
     </div>
+    <!-- 修改密码弹框 -->
+    <CommonDrawer ref="commonDrawer" title="修改密码">
+        <div style="height: 1000px;">
+            11
+        </div>
+    </CommonDrawer>
 </template>
 <script lang="ts" setup>
 import { ref } from "vue";

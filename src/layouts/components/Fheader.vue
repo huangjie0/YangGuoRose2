@@ -94,6 +94,5 @@ const handleRefresh = ()=>{
     .logo-right{
         align-items: center;
     }
-
 }
 </style>

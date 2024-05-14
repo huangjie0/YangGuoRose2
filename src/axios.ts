@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { toast } from '@/composables/util.ts'
 import { getToken } from '@/composables/auth.ts'
+import useUserStore from "@/store/index.ts";
 
 const service:any = axios.create({
     baseURL:"/api"
@@ -27,8 +28,11 @@ service.interceptors.response.use(function (response:any) {
     return response.data.data;
   }, function (error:any) {
     // 对响应错误做点什么
-    
-    toast(error.response.data.msg,'error')
+    const msg = error.response.data.msg || "请求失败"
+    if(msg == "非法token，请先登录！"){
+      useUserStore().logout().finally(()=>location.reload())
+    }
+    toast(msg,'error')
 
     return Promise.reject(error);
 });

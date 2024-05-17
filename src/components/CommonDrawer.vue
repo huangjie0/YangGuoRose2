@@ -7,7 +7,7 @@
                 </el-scrollbar>
             </div>
             <div class="actions rose-mt-a rose-f-row">
-                <el-button type="primary" >提交</el-button>
+                <el-button type="primary">提交</el-button>
                 <el-button @click="close">取消</el-button>
             </div>
         </div>

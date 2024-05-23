@@ -34,7 +34,7 @@
     </div>
     <!-- 修改密码弹框 -->
     <CommonDrawer ref="commonDrawer" title="修改密码">
-        <div style="height: 1000px;">
+        <div>
             11
         </div>
     </CommonDrawer>

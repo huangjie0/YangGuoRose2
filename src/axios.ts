@@ -33,7 +33,7 @@ service.interceptors.response.use(function (response:any) {
       useUserStore().logout().finally(()=>location.reload())
     }
     toast(msg,'error')
-
+    
     return Promise.reject(error);
 });
 

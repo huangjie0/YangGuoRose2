@@ -7,14 +7,14 @@
                 </el-scrollbar>
             </div>
             <div class="actions rose-mt-a rose-f-row">
-                <el-button type="primary">提交</el-button>
+                <el-button type="primary" @click="submit" :loading="loading">提交</el-button>
                 <el-button @click="close">取消</el-button>
             </div>
         </div>
     </el-drawer>
 </template>
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref,defineEmits } from 'vue'
 
 interface Params { 
     title:string;
@@ -28,6 +28,7 @@ withDefaults(defineProps<Params>(),{
 })
 
 const drawer = ref(false)
+const loading = ref(false)
 
 //打开抽屉
 const open = ()=>{
@@ -39,9 +40,17 @@ const close = ()=>{
     drawer.value = false
 }
 
+const emit = defineEmits(['formSubmit'])
+
+//提交按钮
+const submit = ()=>{
+    emit('formSubmit')
+}
+
 defineExpose({
     open,
-    close
+    close,
+    loading
 })
 
 </script>

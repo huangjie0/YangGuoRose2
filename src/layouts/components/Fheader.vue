@@ -30,28 +30,90 @@
                     </el-dropdown-menu>
                 </template>
             </el-dropdown>
-        </div>
+        </div>  
     </div>
     <!-- 修改密码弹框 -->
-    <CommonDrawer ref="commonDrawer" title="修改密码">
-        <div>
-            11
-        </div>
+    <CommonDrawer ref="commonDrawer" title="修改密码" size="50%" @form-submit="formSubmit(formRef)">
+        <el-form :model="form" :rules="rules" ref="formRef" label-width="80px">
+            <el-form-item prop="password" label="新密码">
+                <el-input v-model="form.password" placeholder="请输入密码"></el-input>
+            </el-form-item>
+            <el-form-item prop="oldpassword" label="旧密码">
+                <el-input v-model="form.oldpassword" placeholder="请输入旧密码" type="password"  show-password></el-input>
+            </el-form-item>
+            <el-form-item prop="repassword" label="确认密码">
+                <el-input v-model="form.repassword" placeholder="请输入确认密码" type="password"  show-password></el-input>
+            </el-form-item>
+        </el-form>
     </CommonDrawer>
 </template>
 <script lang="ts" setup>
-import { ref } from "vue";
+import { ref,reactive } from "vue";
+import type { FormRules,FormInstance } from 'element-plus'
 import useUserStore from "@/store/index.ts";
 import { logout,updatePassword } from '@/api/manager.ts';
 import { showModal , toast } from "@/composables/util.ts";
 import { useRouter } from "vue-router";
 import { useFullscreen } from '@vueuse/core';
-import CommonDrawer from '@/components/CommonDrawer.vue'
+import CommonDrawer from '@/components/CommonDrawer.vue';
 
 const userStore = useUserStore()
 const router = useRouter()
 const { isFullscreen, toggle } = useFullscreen()
 const commonDrawer = ref();
+
+interface Params {
+    oldpassword:string,
+    password:string,
+    repassword:string
+}
+
+const form = reactive<Params>({
+    oldpassword:'',
+    password:'',
+    repassword:''  
+})
+
+const formRef = ref<FormInstance>()
+
+const rules = reactive<FormRules<Params>>({
+    password:[
+        {
+            required: true,
+            message:'密码不能为空',
+            trigger: 'blur'
+        }
+    ],
+    oldpassword:[
+        {
+            message:'旧密码不能为空',
+            required: true,
+            trigger: 'blur'
+        }
+    ],
+    repassword:[
+        {
+            message:'确认密码不能为空',
+            required: true,
+            trigger: 'blur'
+        }
+    ]
+})
+
+const formSubmit = async (formEl: FormInstance | undefined) => {
+    if(!formEl) return
+    await formEl.validate((valid:any)=>{
+        if(!valid) return
+        commonDrawer.value.loading = true;
+        updatePassword(form).then((__res:any)=>{
+            toast("修改密码成功，请重新登录！")
+            userStore.logout()
+            router.push("/login")
+        }).finally(()=>{
+            commonDrawer.value.loading = false;
+        })
+    })
+}
 
 const userLogOut = ()=> {
     showModal("是否要退出登录？").then(()=>{

@@ -13,7 +13,7 @@ service.interceptors.request.use(function (config:any) {
     if(token){
         config.headers["token"] = token
     }
-
+    
     // 在发送请求之前做些什么
     return config;
   }, function (error:any) {

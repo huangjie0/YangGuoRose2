@@ -1,12 +1,12 @@
 <template>
     <div>
-        <!-- {{ userStore.user }} -->
+        {{ userStore.user }}
     </div>
 </template>
 <script lang="ts" setup>
-// import useUserStore from "@/store/index.ts";
+import useUserStore from "@/store/index.ts";
 
-// const userStore = useUserStore()
+const userStore = useUserStore()
 
 </script>
 <style lang="less" scoped>

@@ -1,7 +1,8 @@
 <template>
   <div class="f-menu rose-f-fixed" :style="{ width: screenStore.asideWidth }">
     <el-scrollbar>
-      <el-menu default-active="2" @select="handleSelect">
+      <el-menu default-active="2" @select="handleSelect" 
+      :collapse="screenStore.asideWidth == '64px' ? true : false">
         <template v-for="item in asideMenus" :key="item.icon">
           <el-sub-menu
             :index="item.name"
@@ -185,7 +186,6 @@ const asideMenus: any[] = [
 </script>
 <style lang="less" scoped>
 .f-menu {
-//   width: 200px;
   top: 64px;
   bottom: 0;
   left: 0;

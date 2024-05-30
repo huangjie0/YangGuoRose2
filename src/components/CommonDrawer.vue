@@ -32,6 +32,7 @@ const loading = ref(false)
 
 //打开抽屉
 const open = ()=>{
+    debugger;
     drawer.value = true
 }
 

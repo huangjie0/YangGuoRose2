@@ -3,7 +3,10 @@
         <span class="f-header-logo rose-f-c rose-font-s3">
             <el-icon class="rose-mr-1"><Bicycle /></el-icon>
             <span class="rose-mr-1">洋果子Rose后台系统</span>
-            <el-icon class="rose-mr-1 rose-cursor"><Fold /></el-icon>
+            <el-icon class="rose-mr-1 rose-cursor" @click="handleScreen">
+                <Fold v-if="screenStore.asideWidth == '200px'" />
+                <Expand v-else />
+            </el-icon>
             <el-tooltip effect="dark" content="刷新" placement="bottom">
                 <el-icon class="rose-mr-1 rose-cursor" @click="handleRefresh"><Refresh /></el-icon>
             </el-tooltip>
@@ -49,17 +52,23 @@
 </template>
 <script lang="ts" setup>
 import useUserStore from "@/store/index.ts";
+import useScreenStore from "@/store/screen.ts";
 import { useFullscreen } from '@vueuse/core';
 import CommonDrawer from '@/components/CommonDrawer.vue';
 import { useRepassword , useHandleLogout} from '@/composables/useManager.ts';
 
 const userStore = useUserStore()
+const screenStore = useScreenStore()
 const { isFullscreen, toggle } = useFullscreen()
 const { formRef,form,rules,formSubmit,commonDrawer } = useRepassword()
 const { userLogOut } = useHandleLogout()
 
 const userRePassword = ()=>{
     commonDrawer.value.open()
+}
+
+const handleScreen = ()=>{
+    screenStore.handleAsideWidth()
 }
 
 const handleCommand = (v:string)=>{

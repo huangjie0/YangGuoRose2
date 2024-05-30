@@ -1,5 +1,5 @@
 <template>
-  <div class="f-menu rose-f-fixed">
+  <div class="f-menu rose-f-fixed" :style="{ width: screenStore.asideWidth }">
     <el-scrollbar>
       <el-menu default-active="2" @select="handleSelect">
         <template v-for="item in asideMenus" :key="item.icon">
@@ -33,8 +33,10 @@
 </template>
 <script lang="ts" setup>
 import { useRouter } from "vue-router";
+import useScreenStore from "@/store/screen.ts";
 
 const router = useRouter()
+const screenStore = useScreenStore()
 
 const handleSelect = (path:string)=>{
     router.push(path)
@@ -183,7 +185,7 @@ const asideMenus: any[] = [
 </script>
 <style lang="less" scoped>
 .f-menu {
-  width: 200px;
+//   width: 200px;
   top: 64px;
   bottom: 0;
   left: 0;

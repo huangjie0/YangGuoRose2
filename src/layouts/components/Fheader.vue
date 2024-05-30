@@ -49,29 +49,14 @@
 </template>
 <script lang="ts" setup>
 import useUserStore from "@/store/index.ts";
-import { logout } from '@/api/manager.ts';
-import { showModal , toast } from "@/composables/util.ts";
-import { useRouter } from "vue-router";
 import { useFullscreen } from '@vueuse/core';
 import CommonDrawer from '@/components/CommonDrawer.vue';
-import { useRepassword } from '@/composables/useManager.ts'
+import { useRepassword , useHandleLogout} from '@/composables/useManager.ts';
 
 const userStore = useUserStore()
-const router = useRouter()
 const { isFullscreen, toggle } = useFullscreen()
 const { formRef,form,rules,formSubmit,commonDrawer } = useRepassword()
-
-const userLogOut = ()=> {
-    showModal("是否要退出登录？").then(()=>{
-        logout().finally(()=>{
-            userStore.logout()
-            //跳转到用户登录页 
-            router.push("/login")
-            //提示错误信息
-            toast("退出登录成功！")
-        })
-    })
-}
+const { userLogOut } = useHandleLogout()
 
 const userRePassword = ()=>{
     commonDrawer.value.open()

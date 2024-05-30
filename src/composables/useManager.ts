@@ -1,7 +1,7 @@
 import { ref,reactive } from "vue";
 import type { FormRules,FormInstance } from 'element-plus';
-import { updatePassword } from '@/api/manager.ts';
-import { toast } from "@/composables/util.ts";
+import { updatePassword,logout } from '@/api/manager.ts';
+import { toast,showModal } from "@/composables/util.ts";
 import useUserStore from "@/store/index.ts";
 import { useRouter } from "vue-router";
 
@@ -63,13 +63,32 @@ export function useRepassword(){
             })
         })
     }
-    
+
     return {
         formRef,
         form,
         rules,
         formSubmit,
         commonDrawer
+    }
+}
+
+export function useHandleLogout(){
+    const userStore = useUserStore()
+    const router = useRouter()
+    const userLogOut = ()=> {
+        showModal("是否要退出登录？").then(()=>{
+            logout().finally(()=>{
+                userStore.logout()
+                //跳转到用户登录页 
+                router.push("/login")
+                //提示错误信息
+                toast("退出登录成功！")
+            })
+        })
+    }
+    return {
+        userLogOut
     }
 
 }

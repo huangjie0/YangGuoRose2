@@ -2,7 +2,7 @@
   <div class="f-menu rose-f-fixed">
     <el-scrollbar>
       <el-menu default-active="2">
-        <template v-for="(item, index) in asideMenus" :key="index">
+        <template v-for="item in asideMenus" :key="item.icon">
           <el-sub-menu
             :index="item.name"
             v-if="item.child && item.child.length > 0"
@@ -13,8 +13,12 @@
               </el-icon>
               <span>{{ item.name }}</span>
             </template>
-            <el-menu-item v-for="(item2,index2) in item.child" :key="index2" :index="item2.frontpath">{{ item2.name }}</el-menu-item>
-
+            <el-menu-item v-for="(item2,index2) in item.child" :key="index2" :index="item2.frontpath">
+                <el-icon>
+                    <component :is="item2.icon"></component>
+                </el-icon>
+                <span>{{ item2.name }}</span>
+            </el-menu-item>
           </el-sub-menu>
           <el-menu-item :index="item.frontpath" v-else>
             <el-icon>

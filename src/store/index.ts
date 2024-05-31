@@ -3,12 +3,16 @@ import { getInfo,login } from "@/api/manager.ts"
 import { setToken,removeToken } from '@/composables/auth.ts'
 interface Type { 
     user: object | null,
+    menus: any[],
+    ruleName: any[]
 }
 
 const useUserStore = defineStore('userInfo', {
     state: ():Type => {
         return {
-            user:null
+            user:null,
+            menus:[],
+            ruleName:[]
         }
     },
     actions: {
@@ -24,8 +28,16 @@ const useUserStore = defineStore('userInfo', {
       setUserInfo(user:object) {
         this.user = user
       },
+      setMenus(menus:any[]){
+        this.menus = menus
+      },
+      setRuleName(ruleName:any[]){
+        this.ruleName = ruleName
+      },
       getUserInfo(){
         getInfo().then((res:any)=>{
+          this.setMenus(res.menus)
+          this.setRuleName(res.ruleNames)
           this.setUserInfo(res)
         })
       },

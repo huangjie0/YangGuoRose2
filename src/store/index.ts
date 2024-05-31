@@ -3,7 +3,7 @@ import { getInfo,login } from "@/api/manager.ts"
 import { setToken,removeToken } from '@/composables/auth.ts'
 interface Type { 
     user: object | null,
-    
+
 }
 
 const useUserStore = defineStore('userInfo', {

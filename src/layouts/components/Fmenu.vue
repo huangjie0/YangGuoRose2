@@ -53,7 +53,7 @@ const isCollapse = computed(()=>{
     return screenStore.asideWidth == '64px' ? true : false 
 })
 
-onBeforeRouteUpdate((to) => {
+onBeforeRouteUpdate((to:any) => {
     defaultActive.value = to.path;
 });
 

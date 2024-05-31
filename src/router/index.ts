@@ -1,9 +1,7 @@
 import { createRouter,createWebHashHistory } from 'vue-router'
-import Index from '@/pages/Index.vue'
 import Login from '@/pages/Login.vue'
 import NotFound from '@/pages/404.vue'
 import Admin from '@/layouts/Admin.vue'
-import GoodsList from '@/pages/goods/List.vue'
 
 const routes:any[] = [
     {
@@ -12,19 +10,137 @@ const routes:any[] = [
         children:[
             {
                 path:'/',
-                component:Index,
+                component:()=>import('@/pages/Index.vue'),
                 meta:{
                     title:'后台首页'
                 }
             },
             {
                 path:'/goods/list',
-                component:GoodsList,
+                component:()=>import('@/pages/goods/List.vue'),
                 meta:{
                     title:'商品管理'
                 }
-            }
-        
+            },
+            {
+                path:'/category/list',
+                component:()=>import('@/pages/category/List.vue'),
+                meta:{
+                    title:'分类管理'
+                }
+            },
+            {
+                path:'/skus/list',
+                component:()=>import('@/pages/skus/List.vue'),
+                meta:{
+                    title:'规格管理'
+                }
+            },
+            {
+                path:'/coupon/list',
+                component:()=>import('@/pages/coupon/List.vue'),
+                meta:{
+                    title:'优惠券管理'
+                }
+            },
+            {
+                path:'/user/list',
+                component:()=>import('@/pages/User/List.vue'),
+                meta:{
+                    title:'用户管理'
+                }
+            },
+            {
+                path:'/level/list',
+                component:()=>import('@/pages/level/List.vue'),
+                meta:{
+                    title:'会员等级'
+                }
+            },
+            {
+                path:'/order/list',
+                component:()=>import('@/pages/order/List.vue'),
+                meta:{
+                    title:'订单管理'
+                }
+            },
+            {
+                path:'/comment/list',
+                component:()=>import('@/pages/comment/List.vue'),
+                meta:{
+                    title:'评论管理'
+                }
+            },
+            {
+                path:'/manager/list',
+                component:()=>import('@/pages/manager/List.vue'),
+                meta:{
+                    title:'管理员管理'
+                }
+            },
+            {
+                path:'/access/list',
+                component:()=>import('@/pages/access/List.vue'),
+                meta:{
+                    title:'权限管理'
+                }
+            },
+            {
+                path:'/role/list',
+                component:()=>import('@/pages/role/List.vue'),
+                meta:{
+                    title:'角色管理'
+                }
+            },
+            {
+                path:'/setting/base',
+                component:()=>import('@/pages/setting/Base.vue'),
+                meta:{
+                    title:'基础设置'
+                }
+            },
+            {
+                path:'/setting/buy',
+                component:()=>import('@/pages/setting/Buy.vue'),
+                meta:{
+                    title:'交易设置'
+                }
+            },
+            {
+                path:'/setting/ship',
+                component:()=>import('@/pages/setting/Ship.vue'),
+                meta:{
+                    title:'物流设置'
+                }
+            },
+            {
+                path:'/distribution/index',
+                component:()=>import('@/pages/distribution/Distributor.vue'),
+                meta:{
+                    title:'分销员管理'
+                }
+            },
+            {
+                path:'/distribution/setting',
+                component:()=>import('@/pages/distribution/DistributionSetup.vue'),
+                meta:{
+                    title:'分销设置'
+                }
+            },
+            {
+                path:'/image/list',
+                component:()=>import('@/pages/image/List.vue'),
+                meta:{
+                    title:'图库管理'
+                }
+            },
+            {
+                path:'/notice/list',
+                component:()=>import('@/pages/notice/List.vue'),
+                meta:{
+                    title:'公告管理'
+                }
+            },
         ]
     },
     {

@@ -4,7 +4,7 @@
         <Fheader></Fheader>
       </el-header>
       <el-container>
-        <el-aside width="200px">
+        <el-aside :width="screenStore.asideWidth">
             <Fmenu></Fmenu>
         </el-aside>
         <el-main>
@@ -18,9 +18,13 @@
 import Fheader from './components/Fheader.vue';
 import Fmenu from './components/Fmenu.vue';
 import FtagList from './components/FtagList.vue';
+import useScreenStore from "@/store/screen.ts";
 
+const screenStore = useScreenStore()
 
 </script>
 <style lang="less">
-
+.el-aside{
+  transition: all .2s;
+}
 </style>

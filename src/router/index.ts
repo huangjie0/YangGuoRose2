@@ -153,7 +153,8 @@ const routes:any[] = [
     { 
         path: '/:pathMatch(.*)*',
         name: 'NotFound',
-        component: NotFound },
+        component: NotFound 
+    }
 ]
 
 const router = createRouter({

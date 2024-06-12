@@ -45,7 +45,7 @@ const routes:any[] = [
             },
             {
                 path:'/user/list',
-                component:()=>import('@/pages/User/List.vue'),
+                component:()=>import('@/pages/user/List.vue'),
                 meta:{
                     title:'用户管理'
                 }

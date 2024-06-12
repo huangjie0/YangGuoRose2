@@ -18,4 +18,3 @@ export function getInfo(){
 export function updatePassword(data:object){
     return axios.post("/admin/updatepassword",data)
 }
-

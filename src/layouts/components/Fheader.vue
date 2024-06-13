@@ -55,7 +55,7 @@ import useUserStore from "@/store/index.ts";
 import useScreenStore from "@/store/screen.ts";
 import { useFullscreen } from '@vueuse/core';
 import CommonDrawer from '@/components/CommonDrawer.vue';
-import { useRepassword , useHandleLogout} from '@/composables/useManager.ts';
+import { useRepassword,useHandleLogout} from '@/composables/useManager.ts';
 
 const userStore = useUserStore()
 const screenStore = useScreenStore()

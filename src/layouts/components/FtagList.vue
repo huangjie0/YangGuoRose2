@@ -1,22 +1,18 @@
 <template>
-  <div class="rose-tabs-list rose-z-index rose-f-fixed rose-f-row" :style="{left:screenStore.asideWidth}">
+  <div class="rose-tabs-list rose-z-index rose-f-fixed rose-f-row" :style="{ left:screenStore.asideWidth }">
     <el-tabs
-      v-model="editableTabsValue"
+      v-model="activeTab"
       type="card"
       closable
-      class="demo-tabs"
-      @edit="handleTabsEdit"
-      style="width: 96%;"
     >
       <el-tab-pane
-        v-for="item in editableTabs"
-        :key="item.name"
+        v-for="item in tabList"
+        :key="item.path"
         :label="item.title"
-        :name="item.name"
+        :name="item.title"
       >
       </el-tab-pane>
     </el-tabs>
-
     <!-- 下拉菜单部分 -->
     <span class="rose-d rose-bg-w rose-f-c rose-br-s1 rose-ml-a">
       <el-dropdown>
@@ -41,55 +37,28 @@
 <script lang="ts" setup>
 import useScreenStore from "@/store/screen.ts";
 import { ref } from 'vue'
-import type { TabPaneName } from 'element-plus'
+import { useRoute } from 'vue-router'
 
-let tabIndex = 2
-const editableTabsValue = ref('2')
+const route = useRoute()
+const activeTab = ref(route.path)
 const screenStore = useScreenStore()
-const editableTabs = ref([
+const tabList = ref<any[]>([
   {
-    title: 'Tab 1',
-    name: '1',
-    content: 'Tab 1 content',
+    title: '后台首页',
+    path:'/'
+
   },
   {
-    title: 'Tab 2',
-    name: '2',
-    content: 'Tab 2 content',
+    title: '商城管理',
+    path:'/goods/list'
   }
 ])
 
-const handleTabsEdit = (
-  targetName: TabPaneName | undefined,
-  action: 'remove' | 'add'
-) => {
-  if (action === 'add') {
-    const newTabName = `${++tabIndex}`
-    editableTabs.value.push({
-      title: 'New Tab',
-      name: newTabName,
-      content: 'New Tab content',
-    })
-    editableTabsValue.value = newTabName
-  } else if (action === 'remove') {
-    const tabs = editableTabs.value
-    let activeName = editableTabsValue.value
-    if (activeName === targetName) {
-      tabs.forEach((tab, index) => {
-        if (tab.name === targetName) {
-          const nextTab = tabs[index + 1] || tabs[index - 1]
-          if (nextTab) {
-            activeName = nextTab.name
-          }
-        }
-      })
-    }
-    editableTabsValue.value = activeName
-    editableTabs.value = tabs.filter((tab) => tab.name !== targetName)
-  }
-}
 </script>
 <style lang="less" scoped>
+.el-tabs{
+  width: 96%;
+}
 .rose-tabs-list {
   align-items: center;
   height: 44px;
@@ -102,8 +71,8 @@ const handleTabsEdit = (
   }
 }
 
-::v-deep .el-tabs__nav-next,
-::v-deep .el-tabs__nav-prev{
+:deep(.el-tabs__nav-next),
+:deep(.el-tabs__nav-prev){
   line-height: var(--common-split7);
   height: var(--common-split7);
 }

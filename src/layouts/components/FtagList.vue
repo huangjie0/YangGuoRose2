@@ -40,7 +40,7 @@
 <script lang="ts" setup>
 import useScreenStore from "@/store/screen.ts";
 import { ref } from 'vue'
-import { useRoute , onBeforeRouteUpdate,useRouter } from 'vue-router'
+import { useRoute , onBeforeRouteUpdate , useRouter } from 'vue-router'
 import { useCookies } from '@vueuse/integrations/useCookies'
 
 const route = useRoute()
@@ -70,11 +70,13 @@ onBeforeRouteUpdate((to:any)=>{
   })
 })
 
+//点击tabs事件
 const handleChange = (path:string)=>{
   activeTab.value = path
   router.push(path)
 }
 
+//移除tabs逻辑
 const tabRemove = (path:string)=>{
   let tabs = tabList.value
   let a = activeTab.value
@@ -93,6 +95,7 @@ const tabRemove = (path:string)=>{
   router.push(activeTab.value)
   tabList.value = tabList.value.filter((tab) => tab.path !== path)
   cookie.set("tabList",tabList.value)
+
 }
 
 //初始化标签导航

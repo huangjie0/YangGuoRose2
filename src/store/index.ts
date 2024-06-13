@@ -4,7 +4,8 @@ import { setToken,removeToken } from '@/composables/auth.ts'
 interface Type { 
     user: object | null,
     menus: any[],
-    ruleName: any[]
+    ruleName: any[],
+    password: string
 }
 
 const useUserStore = defineStore('userInfo', {
@@ -12,7 +13,8 @@ const useUserStore = defineStore('userInfo', {
         return {
             user:null,
             menus:[],
-            ruleName:[]
+            ruleName:[],
+            password:''
         }
     },
     actions: {
@@ -20,6 +22,7 @@ const useUserStore = defineStore('userInfo', {
         return new Promise((resolve:any,reject:any)=>{
           login(username,password).then((res:any)=>{
             setToken(res.token)
+            this.password = password
             this.getUserInfo()
             resolve(res)
           }).catch((err:any)=>reject(err))

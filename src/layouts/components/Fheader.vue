@@ -64,7 +64,10 @@ const { formRef,form,rules,formSubmit,commonDrawer } = useRepassword()
 const { userLogOut } = useHandleLogout()
 
 const userRePassword = ()=>{
-    commonDrawer.value.open()
+    for (const key in form) {
+        form[key] = ''
+    }
+    commonDrawer.value.open() 
 }
 
 const handleScreen = ()=>{

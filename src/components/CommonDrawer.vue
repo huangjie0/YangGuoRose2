@@ -14,7 +14,7 @@
     </el-drawer>
 </template>
 <script setup lang="ts">
-import { ref,defineEmits } from 'vue'
+import { ref } from 'vue'
 
 interface Params { 
     title:string;
@@ -32,7 +32,6 @@ const loading = ref(false)
 
 //打开抽屉
 const open = ()=>{
-    debugger;
     drawer.value = true
 }
 

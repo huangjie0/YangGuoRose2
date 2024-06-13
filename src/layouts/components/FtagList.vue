@@ -3,13 +3,14 @@
     <el-tabs
       v-model="activeTab"
       type="card"
-      closable
+      @tabChange = "handleChange"
     >
       <el-tab-pane
         v-for="item in tabList"
         :key="item.path"
         :label="item.title"
         :name="item.title"
+        :closable="item.path != '/'"
       >
       </el-tab-pane>
     </el-tabs>
@@ -33,26 +34,47 @@
       </el-dropdown>
     </span>
   </div>
+  <div style="height:44px;">
+
+  </div>
 </template>
 <script lang="ts" setup>
 import useScreenStore from "@/store/screen.ts";
 import { ref } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute , onBeforeRouteUpdate,useRouter } from 'vue-router'
+import { useCookies } from '@vueuse/integrations/useCookies'
 
 const route = useRoute()
+const router = useRouter()
 const activeTab = ref(route.path)
 const screenStore = useScreenStore()
+const cookie = useCookies()
+
 const tabList = ref<any[]>([
   {
     title: '后台首页',
     path:'/'
-
-  },
-  {
-    title: '商城管理',
-    path:'/goods/list'
   }
 ])
+
+const addTab = (tabs:any)=>{
+  let noTab = tabList.value.findIndex(t => t.path == tabs.path) == -1;
+  if(noTab)tabList.value.push(tabs)
+  cookie.set('tabList',tabList.value)
+}
+
+onBeforeRouteUpdate((to:any)=>{
+  activeTab.value = to.path
+  addTab({
+    title:to.meta.title,
+    path:to.path
+  })
+})
+
+const handleChange = (path:string)=>{
+  activeTab.value = path
+  router.push(path)
+}
 
 </script>
 <style lang="less" scoped>

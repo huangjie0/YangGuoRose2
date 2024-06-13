@@ -4,12 +4,13 @@
       v-model="activeTab"
       type="card"
       @tabChange = "handleChange"
+      @tabRemove = "tabRemove"
     >
       <el-tab-pane
         v-for="item in tabList"
         :key="item.path"
         :label="item.title"
-        :name="item.title"
+        :name="item.path"
         :closable="item.path != '/'"
       >
       </el-tab-pane>
@@ -34,9 +35,7 @@
       </el-dropdown>
     </span>
   </div>
-  <div style="height:44px;">
-
-  </div>
+  <div class="placeholder"></div>
 </template>
 <script lang="ts" setup>
 import useScreenStore from "@/store/screen.ts";
@@ -76,6 +75,36 @@ const handleChange = (path:string)=>{
   router.push(path)
 }
 
+const tabRemove = (path:string)=>{
+  let tabs = tabList.value
+  let a = activeTab.value
+  if(a == path){
+      tabs.forEach((tab,index)=>{
+        if(tab.path == path){
+          const nextTab = tabs[index+1] || tabs[index-1]
+          if(nextTab) {
+            a = nextTab.path
+          }
+        }
+      })
+  } 
+
+  activeTab.value = a
+  router.push(activeTab.value)
+  tabList.value = tabList.value.filter((tab) => tab.path !== path)
+  cookie.set("tabList",tabList.value)
+}
+
+//初始化标签导航
+const initTabList = ()=>{
+  let tabs = cookie.get("tabList")
+  if(tabs){
+    tabList.value = tabs
+  }
+}
+
+initTabList()
+
 </script>
 <style lang="less" scoped>
 .el-tabs{
@@ -96,6 +125,10 @@ const handleChange = (path:string)=>{
 :deep(.el-tabs__nav-next),
 :deep(.el-tabs__nav-prev){
   line-height: var(--common-split7);
+  height: var(--common-split7);
+}
+
+.placeholder{
   height: var(--common-split7);
 }
 

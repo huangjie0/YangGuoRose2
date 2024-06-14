@@ -42,5 +42,11 @@ const screenStore = useScreenStore()
 .fade-enter-to,.fade-leave-from{
   opacity: 1;
 }
+.fade-enter-active,.fade-leave-active{
+  transition: all .3s;
+}
+.fade-enter-active{
+  transition-delay: .3s;
+}
 
 </style>

@@ -14,7 +14,7 @@
     </el-drawer>
 </template>
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref } from 'vue';
 
 interface Params { 
     title:string;
@@ -38,6 +38,7 @@ const open = ()=>{
 //关闭抽屉
 const close = ()=>{
     drawer.value = false
+
 }
 
 const emit = defineEmits(['formSubmit'])
@@ -46,6 +47,7 @@ const emit = defineEmits(['formSubmit'])
 const submit = ()=>{
     emit('formSubmit')
 }
+
 
 defineExpose({
     open,

@@ -9,7 +9,14 @@
         </el-aside>
         <el-main>
             <FtagList></FtagList>
-            <router-view></router-view>
+              <router-view v-slot="{ Component }">
+                <Transition name="fade">
+                  <keep-alive :max="10">
+                    <component :is="Component"/>
+                  </keep-alive>
+
+                </Transition>
+              </router-view>
         </el-main>
       </el-container>
     </el-container>
@@ -24,7 +31,16 @@ const screenStore = useScreenStore()
 
 </script>
 <style lang="less">
+
 .el-aside{
   transition: all .2s;
 }
+.fade-enter-from,.fade-leave-to {
+    opacity: 0;
+}
+
+.fade-enter-to,.fade-leave-from{
+  opacity: 1;
+}
+
 </style>

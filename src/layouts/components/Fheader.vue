@@ -67,6 +67,7 @@ const userRePassword = ()=>{
     for (const key in form) {
         form[key] = ''
     }
+    formRef.value?.clearValidate(['password','oldpassword','repassword'])
     commonDrawer.value.open() 
 }
 

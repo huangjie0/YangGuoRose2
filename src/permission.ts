@@ -3,6 +3,8 @@ import { getToken } from '@/composables/auth.ts'
 import { toast,showFullLoading,hideFullLoading } from '@/composables/util.ts'
 import useUserStore from "@/store/index.ts"
 
+//全局前置守卫操作
+let hasGetInfo:boolean = false
 router.beforeEach((to:any,from:any,next:Function) => {
     showFullLoading();
     const token = getToken()
@@ -18,8 +20,9 @@ router.beforeEach((to:any,from:any,next:Function) => {
     }
 
     //用户登录了
-    if(token){
+    if(token && !hasGetInfo){
         userStore.getUserInfo()
+        hasGetInfo = true
     }
     
     //设置页面标题

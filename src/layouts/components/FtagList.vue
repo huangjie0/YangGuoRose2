@@ -15,9 +15,10 @@
       >
       </el-tab-pane>
     </el-tabs>
+
     <!-- 下拉菜单部分 -->
     <span class="rose-d rose-bg-w rose-f-c rose-br-s1 rose-ml-a">
-      <el-dropdown>
+      <el-dropdown @command="handleCommand">
         <span class="el-dropdown-link">
           <el-icon class="el-icon--right">
             <arrow-down />
@@ -25,11 +26,8 @@
         </span>
         <template #dropdown>
           <el-dropdown-menu>
-            <el-dropdown-item>Action 1</el-dropdown-item>
-            <el-dropdown-item>Action 2</el-dropdown-item>
-            <el-dropdown-item>Action 3</el-dropdown-item>
-            <el-dropdown-item disabled>Action 4</el-dropdown-item>
-            <el-dropdown-item divided>Action 5</el-dropdown-item>
+            <el-dropdown-item command="clearOther">关闭其他</el-dropdown-item>
+            <el-dropdown-item command="clearAll">全部关闭</el-dropdown-item>
           </el-dropdown-menu>
         </template>
       </el-dropdown>
@@ -39,74 +37,10 @@
 </template>
 <script lang="ts" setup>
 import useScreenStore from "@/store/screen.ts";
-import { ref } from 'vue'
-import { useRoute , onBeforeRouteUpdate , useRouter } from 'vue-router'
-import { useCookies } from '@vueuse/integrations/useCookies'
+import {useTabList} from "@/composables/useTabList.ts"
 
-const route = useRoute()
-const router = useRouter()
-const activeTab = ref(route.path)
 const screenStore = useScreenStore()
-const cookie = useCookies()
-
-const tabList = ref<any[]>([
-  {
-    title: '后台首页',
-    path:'/'
-  }
-])
-
-const addTab = (tabs:any)=>{
-  let noTab = tabList.value.findIndex(t => t.path == tabs.path) == -1;
-  if(noTab)tabList.value.push(tabs)
-  cookie.set('tabList',tabList.value)
-}
-
-onBeforeRouteUpdate((to:any)=>{
-  activeTab.value = to.path
-  addTab({
-    title:to.meta.title,
-    path:to.path
-  })
-})
-
-//点击tabs事件
-const handleChange = (path:string)=>{
-  activeTab.value = path
-  router.push(path)
-}
-
-//移除tabs逻辑
-const tabRemove = (path:string)=>{
-  let tabs = tabList.value
-  let a = activeTab.value
-  if(a == path){
-      tabs.forEach((tab,index)=>{
-        if(tab.path == path){
-          const nextTab = tabs[index+1] || tabs[index-1]
-          if(nextTab) {
-            a = nextTab.path
-          }
-        }
-      })
-  } 
-
-  activeTab.value = a
-  router.push(activeTab.value)
-  tabList.value = tabList.value.filter((tab) => tab.path !== path)
-  cookie.set("tabList",tabList.value)
-
-}
-
-//初始化标签导航
-const initTabList = ()=>{
-  let tabs = cookie.get("tabList")
-  if(tabs){
-    tabList.value = tabs
-  }
-}
-
-initTabList()
+const { activeTab,tabList,handleChange,handleCommand,tabRemove } = useTabList()
 
 </script>
 <style lang="less" scoped>

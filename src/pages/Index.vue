@@ -54,8 +54,8 @@
 </template>
 <script lang="ts" setup>
 import { ref } from "vue";
-import CountTo from "@/layouts/components/CountTo.vue"
 import { getStatistics1 } from "@/api/index.ts";
+import CountTo from "@/layouts/components/CountTo.vue"
 import IndexNavs from "@/layouts/components/IndexNavs.vue";
 
 const panels = ref<any[]>([])

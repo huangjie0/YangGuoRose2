@@ -14,7 +14,6 @@
                   <keep-alive :max="10">
                     <component :is="Component"/>
                   </keep-alive>
-
                 </Transition>
               </router-view>
         </el-main>

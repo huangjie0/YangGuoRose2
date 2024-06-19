@@ -50,13 +50,22 @@
                 <IndexNavs :icon="item.icon" :color="item.color" :title="item.title" :path="item.path"></IndexNavs>
             </el-col>
         </el-row>
+        <el-row class="rose-navs">
+            <el-col :span="12">
+                <IndexChart></IndexChart>
+            </el-col>
+            <el-col :span="12">
+                
+            </el-col>
+        </el-row>
     </div>
 </template>
 <script lang="ts" setup>
 import { ref } from "vue";
 import { getStatistics1 } from "@/api/index.ts";
-import CountTo from "@/layouts/components/CountTo.vue"
+import CountTo from "@/components/CountTo.vue"
 import IndexNavs from "@/layouts/components/IndexNavs.vue";
+import IndexChart from "@/components/IndexChart.vue"
 
 const panels = ref<any[]>([])
 

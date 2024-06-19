@@ -12,6 +12,7 @@
     "@vueuse/core": "^10.9.0",
     "@vueuse/integrations": "^10.9.0",
     "axios": "^1.6.8",
+    "echarts": "^5.5.0",
     "element-plus": "^2.6.3",
     "gsap": "^3.12.5",
     "less": "^4.2.0",

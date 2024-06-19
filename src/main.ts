@@ -10,6 +10,7 @@ import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import { createPinia } from 'pinia'
 import '@/permission.ts'
 import "nprogress/nprogress.css"
+import 'element-plus/theme-chalk/dark/css-vars.css';
 
 const pinia = createPinia()
 const app = createApp(App)

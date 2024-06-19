@@ -14,8 +14,9 @@
     </el-card>
 </template>
 <script setup lang="ts">
-import { ref , onMounted } from 'vue';
+import { ref , onMounted , onBeforeUnmount } from 'vue';
 import * as echarts from 'echarts';
+import { getStatistics3 } from '@/api/index.ts'
 
 const current = ref("month")
 const option= ref<any[]>([
@@ -35,41 +36,56 @@ const option= ref<any[]>([
 
 const handleChoose = (type:string)=>{
     current.value = type
+    getData()
 }
 
-const myChart:any = ref(null);
+let myChart:any = null;
 
 onMounted(()=>{
     var chartDom = document.getElementById('chart')!;
-    myChart.value = echarts.init(chartDom);
-    
-    // var myChart = echarts.init(chartDom);
+    myChart = echarts.init(chartDom);
+    getData()
+
+    window.addEventListener('resize',function(){
+        myChart.resize()
+    })
 })
 
-// type EChartsOption = echarts.EChartsOption;
+onBeforeUnmount(()=>{
+    myChart && echarts.dispose()
+})
 
-// var chartDom = document.getElementById('main')!;
-// var myChart = echarts.init(chartDom);
-// var option: EChartsOption;
+const getData = ()=>{
+    var option: any;
+    option = {
+        xAxis: {
+            type: 'category',
+            data: []
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series: [
+            {
+            data: [],
+            type: 'bar',
+            showBackground: true,
+            backgroundStyle: {
+                color: 'rgba(180, 180, 180, 0.2)'
+            }
+            }
+        ]
+    };
 
-// option = {
-//   xAxis: {
-//     type: 'category',
-//     data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-//   },
-//   yAxis: {
-//     type: 'value'
-//   },
-//   series: [
-//     {
-//       data: [120, 200, 150, 80, 70, 110, 130],
-//       type: 'bar'
-//     }
-//   ]
-// };
-
-// option && myChart.setOption(option);
-
+    myChart.showLoading()
+    getStatistics3(current.value).then((res:any)=>{
+        option.xAxis.data = res.x
+        option.series[0].data = res.y
+        option && myChart.setOption(option);
+    }).finally(()=>{
+        myChart.hideLoading()
+    }) 
+}
 
 
 </script>

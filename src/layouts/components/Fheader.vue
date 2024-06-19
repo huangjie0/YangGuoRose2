@@ -98,6 +98,7 @@ const handleRefresh = ()=>{
     left:0;
     right:0;
     align-items: center;
+    z-index: 1000;
     &-logo{
         width: 250px;
     }
@@ -105,4 +106,5 @@ const handleRefresh = ()=>{
         align-items: center;
     }
 }
+
 </style>

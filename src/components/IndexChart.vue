@@ -29,7 +29,7 @@ const option= ref<any[]>([
     },
     {
         text:"近24小时",
-        value:""
+        value:"hour"
     }
 ])
 
@@ -42,7 +42,7 @@ const myChart:any = ref(null);
 onMounted(()=>{
     var chartDom = document.getElementById('chart')!;
     myChart.value = echarts.init(chartDom);
-
+    
     // var myChart = echarts.init(chartDom);
 })
 

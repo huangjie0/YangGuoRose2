@@ -87,7 +87,6 @@ const getData = ()=>{
     }) 
 }
 
-
 </script>
 <style lang="less" scoped>
 .chart-card{

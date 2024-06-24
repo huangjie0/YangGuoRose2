@@ -52,7 +52,7 @@
         </el-row>
         <el-row :gutter="20" class="rose-navs">
             <el-col :span="12">
-                <IndexChart></IndexChart>
+                <IndexChart v-permission="['getStatistics3,GET']"></IndexChart>
             </el-col>
             <el-col :span="12" class="rose-f-column rose-f-ijc">
                 <IndexCard title="店铺及商品提示" tip="店铺及商品提示"  :btns="goods"></IndexCard>

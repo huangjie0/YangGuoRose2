@@ -11,6 +11,7 @@ import { createPinia } from 'pinia'
 import '@/permission.ts'
 import "nprogress/nprogress.css"
 import 'element-plus/theme-chalk/dark/css-vars.css';
+import permission from '@/directives/permission.ts';
 
 const pinia = createPinia()
 const app = createApp(App)
@@ -18,6 +19,7 @@ const app = createApp(App)
 app.use(ElementPlus)
 app.use(router)
 app.use(pinia)
+app.use(permission)
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
     app.component(key, component)
   }

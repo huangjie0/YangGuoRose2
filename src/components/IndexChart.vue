@@ -43,12 +43,13 @@ let myChart:any = null;
 
 onMounted(()=>{
     var chartDom = document.getElementById('chart')!;
-    myChart = echarts.init(chartDom);
-    getData()
-
-    window.addEventListener('resize',function(){
+    if(chartDom){
+        myChart = echarts.init(chartDom);
+        getData()
+        window.addEventListener('resize',function(){
         myChart.resize()
     })
+    }
 })
 
 onBeforeUnmount(()=>{

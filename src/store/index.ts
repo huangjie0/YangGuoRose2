@@ -35,7 +35,7 @@ const useUserStore = defineStore('userInfo', {
         this.menus = menus
       },
       setRuleName(ruleName:any[]){
-        this.ruleName = ruleName
+        this.ruleName = ruleName 
       },
       getUserInfo(){
         getInfo().then((res:any)=>{

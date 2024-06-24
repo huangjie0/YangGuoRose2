@@ -1,5 +1,5 @@
 <template>
-    <el-card shadow="hover" :class="{'rose-card-top':isTop}">
+    <el-card shadow="always" :class="{'rose-card-top':isTop}" class="index-card">
         <template #header>
             <div class="rose-f-row rose-card">
                 <span class="rose-card-title">{{  title }}</span>
@@ -10,7 +10,7 @@
             <el-col :span="6" v-for="(item,index) in btns" :key="index">
                 <el-card shadow="always">
                     <div class="rose-f-column rose-f-ijc">
-                        <span>{{ item.value }}</span>
+                        <span class="rose-font-s2 rose-font-w2">{{ item.value }}</span>
                         <span>{{ item.label }}</span>
                     </div>
                 </el-card>
@@ -36,12 +36,16 @@ withDefaults(defineProps<Params>(),{
 
 </script>
 <style lang="less" scoped>
-.rose-card{
-    justify-content: space-between;
-    &-title{
-        font-size: var(--common-split6);
+.index-card{
+    height: 210px;
+    .rose-card{
+        justify-content: space-between;
+        &-title{
+            font-size: var(--common-split6);
+        }
     }
 }
+
 
 .rose-card-top{
     margin-top: var(--common-split7);

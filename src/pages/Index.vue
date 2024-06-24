@@ -54,7 +54,7 @@
             <el-col :span="12">
                 <IndexChart></IndexChart>
             </el-col>
-            <el-col :span="12">
+            <el-col :span="12" class="rose-f-column rose-f-ijc">
                 <IndexCard title="店铺及商品提示" tip="店铺及商品提示"  :btns="goods"></IndexCard>
                 <IndexCard title="交易提示" tip="需要立即处理的交易订单" :btns="order" isTop></IndexCard>
             </el-col>

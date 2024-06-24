@@ -46,7 +46,6 @@ withDefaults(defineProps<Params>(),{
     }
 }
 
-
 .rose-card-top{
     margin-top: var(--common-split7);
 }

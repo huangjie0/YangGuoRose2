@@ -52,7 +52,7 @@ onMounted(()=>{
 })
 
 onBeforeUnmount(()=>{
-    myChart && echarts.dispose()
+    myChart && myChart.dispose()
 })
 
 const getData = ()=>{

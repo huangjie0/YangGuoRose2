@@ -9,17 +9,17 @@
                             <el-card shadow="hover">
                                 <template #header>
                                     <div class="rose-f-row rose-card">
-                                        <el-skeleton-item variant="caption" style="width: 16%;"/>
+                                        <el-skeleton-item variant="caption" style="width:16%;"/>
                                         <el-skeleton-item variant="rect" style="width:8%"/>
                                     </div>
                                 </template>
                             <span> 
-                                <el-skeleton-item variant="p" style=" width: 12%"/>
+                                <el-skeleton-item variant="p" style=" width:12%"/>
                             </span>
                             <el-divider/>
                                 <div class="rose-f-row rose-card">
-                                    <el-skeleton-item variant="text" style="width: 16%;"/>
-                                    <el-skeleton-item variant="text" style="width: 8%;"/>
+                                    <el-skeleton-item variant="text" style="width:16%;"/>
+                                    <el-skeleton-item variant="text" style="width:8%;"/>
                                 </div>
                             </el-card>
                         </template>

@@ -1,5 +1,5 @@
 <template>
-    <el-card shadow="hover">
+    <el-card shadow="always">
         <template #header>
             <div class="rose-f-row chart-card">
                 <span>订单统计</span>

@@ -6,7 +6,7 @@
                 <el-col :span="6" v-for="(_item,index) in panels" :key="index">
                     <el-skeleton animated loading>
                         <template #template>
-                            <el-card shadow="hover">
+                            <el-card shadow="always">
                                 <template #header>
                                     <div class="rose-f-row rose-card">
                                         <el-skeleton-item variant="caption" style="width:16%;"/>
@@ -27,7 +27,7 @@
                 </el-col>
             </template>
             <el-col :span="6" v-for="(item,index) in panels" :key="index">
-                <el-card shadow="hover">
+                <el-card shadow="always">
                     <template #header>
                         <div class="rose-f-row rose-card">
                             <span class="rose-card-title">{{  item.title }}</span>
@@ -52,7 +52,7 @@
         </el-row>
         <el-row :gutter="20" class="rose-navs">
             <el-col :span="12">
-                <IndexChart v-permission="['getStatistics3,GET']"></IndexChart>
+                <IndexChart></IndexChart>
             </el-col>
             <el-col :span="12" class="rose-f-column rose-f-ijc">
                 <IndexCard title="店铺及商品提示" tip="店铺及商品提示"  :btns="goods"></IndexCard>

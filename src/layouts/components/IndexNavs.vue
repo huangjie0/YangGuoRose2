@@ -1,5 +1,5 @@
 <template>
-    <el-card shadow="hover">
+    <el-card shadow="always">
         <div class="rose-f-c rose-cursor rose-f-column">
             <el-icon :style="iconStyle" :size="size">
                 <component :is="icon" @click="$router.push(path)"></component>

@@ -5,9 +5,10 @@
             <el-container>
                 <el-aside width="200px">
                     <div class="top">
-
+                        <div v-for="i in 100" :key="i"> 
+                            {{ i }}
+                        </div>
                     </div>
-                    
                 </el-aside>
                 <el-main>Main</el-main>
             </el-container>
@@ -15,9 +16,8 @@
     </div>
 </template>
 <script setup lang="ts">
-const windowHeight = window.innerHeight || document.body.clientHeight;
-
-const h = windowHeight - 144;
+const windowHeight:any = window.innerHeight || document.body.clientHeight;
+const h:number = windowHeight - 144;
 
 
 </script>

@@ -34,7 +34,6 @@
 const windowHeight:any = window.innerHeight || document.body.clientHeight;
 const h:number = windowHeight - 144;
 
-
 </script>
 <style lang="less" scoped>
 .rose-header{

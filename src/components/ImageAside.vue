@@ -2,15 +2,8 @@
     <el-aside width="200px" class="rose-aside rose-p-r">
         <div class="rose-aside-top rose-p-a-0">
             <el-scrollbar>
-                <div class="rose-aside-list rose-f-row rose-cursor active">
-                    <span class="rose-text-overflow">分类标题</span>
-                    <el-button class="rose-ml-a" text type="primary" size="small">
-                        <el-icon text :size="12"><Edit/></el-icon>
-                    </el-button>
-                    <el-button type="danger" size="small">
-                        <el-icon :size="12"><Close/></el-icon>
-                    </el-button>
-                </div>
+                <AsideList>分类标题</AsideList>
+                <AsideList active>分类标题</AsideList>
             </el-scrollbar>
         </div>
         <div class="rose-aside-bottom rose-p-a-02 rose-f-c ">
@@ -21,6 +14,7 @@
     </el-aside>
 </template>
 <script setup lang="ts">
+import AsideList from '@/components/AsideList.vue'
 
 </script>
 <style lang="less" scoped>

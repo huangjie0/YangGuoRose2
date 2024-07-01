@@ -2,9 +2,9 @@
     <el-aside width="200px" class="rose-aside rose-p-r">
         <div class="rose-aside-top rose-p-a-0">
             <el-scrollbar>
-                <div class="rose-aside-list">
-                    <span>分类标题</span>
-                    <el-button style="margin-left: auto;" text type="primary" size="small">
+                <div class="rose-aside-list rose-f-row rose-cursor active">
+                    <span class="rose-text-overflow">分类标题</span>
+                    <el-button class="rose-ml-a" text type="primary" size="small">
                         <el-icon text :size="12"><Edit/></el-icon>
                     </el-button>
                     <el-button type="danger" size="small">
@@ -19,7 +19,6 @@
             </div>
         </div>
     </el-aside>
-
 </template>
 <script setup lang="ts">
 
@@ -35,11 +34,12 @@
     }
     &-list{
         border-bottom: 1px solid var(--rose-g3);
-        display: flex;
         align-items: center;
-        padding: 10px;
+        padding: var(--common-split5);
         color: var(--rose-g4);
-        cursor: pointer;
+        &:hover{
+            color: var(--rose-p);
+        }
     }
 }
 </style>

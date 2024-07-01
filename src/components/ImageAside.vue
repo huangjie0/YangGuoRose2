@@ -14,7 +14,17 @@
     </el-aside>
 </template>
 <script setup lang="ts">
+import { getImageClassList } from '@/api/imageClass.ts'
 import AsideList from '@/components/AsideList.vue'
+
+//获取图片列表数据
+const getImageList = ()=>{
+    getImageClassList(1).then((res:any)=>{
+        console.log(res);
+    })
+}
+
+getImageList()
 
 </script>
 <style lang="less" scoped>

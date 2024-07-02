@@ -1,12 +1,9 @@
 import { createRouter,createWebHashHistory } from 'vue-router'
-import Login from '@/pages/Login.vue'
-import NotFound from '@/pages/404.vue'
-import Admin from '@/layouts/Admin.vue'
 
 const routes:any[] = [
     {
         path:"/",
-        component:Admin,
+        component:()=>import('@/layouts/Admin.vue'),
         children:[
             {
                 path:'/',
@@ -145,7 +142,7 @@ const routes:any[] = [
     },
     {
         path:'/login',
-        component:Login,
+        component:()=>import('@/pages/Login.vue'),
         meta:{
             title:"登录页"
         }
@@ -153,7 +150,7 @@ const routes:any[] = [
     { 
         path: '/:pathMatch(.*)*',
         name: 'NotFound',
-        component: NotFound 
+        component: ()=>import('@/pages/404.vue') 
     }
 ]
 

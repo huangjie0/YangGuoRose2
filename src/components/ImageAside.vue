@@ -9,15 +9,18 @@
             <el-pagination background layout="prev,next" :total="total" :current-page="currentPage" :page-size="pageSize" @current-change="getImageList"/>
         </div>
     </el-aside>
+    <CommonDrawer ref="drawerRef" @formSubmit="formSubmit" title="新增"></CommonDrawer>
 </template>
 <script setup lang="ts">
 import { ref } from 'vue';
 import { getImageClassList } from '@/api/imageClass.ts'
 import AsideList from '@/components/AsideList.vue'
+import CommonDrawer from '@/components/CommonDrawer.vue'
 
 const loading = ref(false)
 const imageList = ref<any[]>([])
 const activeId = ref(0)
+const drawerRef = ref(null)
 
 //分页
 const currentPage = ref(1)
@@ -41,6 +44,14 @@ const getImageList = (p:any = null)=>{
 }
 
 getImageList()
+
+const formSubmit = ()=>{
+
+}
+
+defineExpose({
+    drawerRef
+})
 
 </script>
 <style lang="less" scoped>

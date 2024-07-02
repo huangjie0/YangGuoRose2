@@ -7,7 +7,7 @@
                 </el-scrollbar>
             </div>
             <div class="actions rose-mt-a rose-f-row">
-                <el-button type="primary" @click="submit" :loading="loading">提交</el-button>
+                <el-button type="primary" @click="$emit('formSubmit')" :loading="loading">提交</el-button>
                 <el-button @click="close">取消</el-button>
             </div>
         </div>
@@ -41,13 +41,7 @@ const close = ()=>{
 
 }
 
-const emit = defineEmits(['formSubmit'])
-
-//提交按钮
-const submit = ()=>{
-    emit('formSubmit')
-}
-
+defineEmits(['formSubmit'])
 
 defineExpose({
     open,

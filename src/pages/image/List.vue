@@ -2,21 +2,28 @@
     <div>
         <el-container class="rose-bg-w rose-br-s1" :style="{ height:h + 'px' }">
             <el-header class="rose-header rose-f-row">
-                header
+                <el-button size="small" type="primary" @click="handleOpen">新增图片分类</el-button>
             </el-header>
             <el-container>
-                <ImageAside></ImageAside>
+                <ImageAside ref="asideRef"></ImageAside>
                 <ImageMain></ImageMain>
             </el-container>
         </el-container>
     </div>
 </template>
 <script setup lang="ts">
+import { ref } from 'vue';
 import ImageAside from '@/components/ImageAside.vue'
 import ImageMain from '@/components/ImageMain.vue'
 
 const windowHeight:any = window.innerHeight || document.body.clientHeight;
 const h:number = windowHeight - 144;
+const asideRef = ref<any>(null);
+
+const handleOpen = ()=>{
+    asideRef.value.drawerRef.open()
+}
+
 
 </script>
 <style lang="less" scoped>

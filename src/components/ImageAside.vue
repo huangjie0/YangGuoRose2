@@ -9,23 +9,55 @@
             <el-pagination background layout="prev,next" :total="total" :current-page="currentPage" :page-size="pageSize" @current-change="getImageList"/>
         </div>
     </el-aside>
-    <CommonDrawer ref="drawerRef" @formSubmit="formSubmit" title="新增"></CommonDrawer>
+    <CommonDrawer ref="drawerRef" @formSubmit="formSubmit" title="新增">
+        <el-form :model="form" :rules="rules" ref="formRef" label-width="80px">
+            <el-form-item prop="name" label="分类名称">
+                <el-input v-model="form.name"></el-input>
+            </el-form-item>
+            <el-form-item prop="order" label="排序">
+                <el-input-number v-model="form.order" :min="0" :max="10000"></el-input-number>
+            </el-form-item>
+        </el-form>
+    </CommonDrawer>
 </template>
 <script setup lang="ts">
-import { ref } from 'vue';
-import { getImageClassList } from '@/api/imageClass.ts'
+import { ref,reactive } from 'vue';
+import { getImageClassList,createImageClass } from '@/api/imageClass.ts'
+import { toast } from '@/composables/util.ts'
 import AsideList from '@/components/AsideList.vue'
 import CommonDrawer from '@/components/CommonDrawer.vue'
+import type { FormRules } from 'element-plus'
 
 const loading = ref(false)
 const imageList = ref<any[]>([])
 const activeId = ref(0)
-const drawerRef = ref(null)
+const drawerRef = ref<any>(null)
+const formRef = ref<any>(null)
 
 //分页
 const currentPage = ref(1)
 const total = ref(0)
 const pageSize = ref(10)
+
+interface formParams{
+    name:string,
+    order:number
+}
+
+const form = reactive<formParams>({
+    name:'',
+    order:50
+})
+
+const rules = reactive<FormRules<formParams>> ({
+    name:[
+        {
+            required:true,
+            message:'图库分类名称不能为空',
+            trigger:'blur'
+        }
+    ]
+})
 
 //获取图片列表数据
 const getImageList = (p:any = null)=>{
@@ -46,7 +78,17 @@ const getImageList = (p:any = null)=>{
 getImageList()
 
 const formSubmit = ()=>{
-
+    formRef.value.validate((valid:any)=>{
+        if(!valid) return
+        drawerRef.value.loading = true
+        createImageClass(form).then((_res:any)=>{
+            toast("新增图片分类成功")
+            getImageList(1)
+            drawerRef.value.close()
+        }).finally(()=>{
+            drawerRef.value.loading = false
+        })
+    })
 }
 
 defineExpose({

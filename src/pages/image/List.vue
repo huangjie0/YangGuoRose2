@@ -21,7 +21,11 @@ const h:number = windowHeight - 144;
 const asideRef = ref<any>(null);
 
 const handleOpen = ()=>{
+    asideRef.value.form.name = ''
+    asideRef.value.form.order = 50
     asideRef.value.drawerRef.open()
+    asideRef.value.formRef?.clearValidate()
+    asideRef.value.editFlag = true
 }
 
 

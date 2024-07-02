@@ -8,3 +8,7 @@ export function getImageClassList(page:number){
 export function createImageClass(data:object){
     return axios.post("/admin/image_class",data)
 }
+
+export function updateImageClass(id:number,data:object){
+    return axios.post(`/admin/image_class/${id}`,data)
+}

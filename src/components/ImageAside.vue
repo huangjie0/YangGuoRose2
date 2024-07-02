@@ -34,6 +34,7 @@ const activeId = ref(0)
 const drawerRef = ref<any>(null)
 const formRef = ref<any>(null)
 const editFlag = ref(false)
+const editId = ref(0)
 const title = ref('新增')
 
 watch(()=>editFlag.value,(newValue:boolean)=>{
@@ -87,8 +88,9 @@ const formSubmit = ()=>{
     formRef.value.validate((valid:any)=>{
         if(!valid) return
         drawerRef.value.loading = true
-        createImageClass(form).then((_res:any)=>{
-            toast("新增图片分类成功")
+        let fun = editFlag.value ? createImageClass(form) : updateImageClass(editId.value,form) 
+        fun.then((_res:any)=>{
+            toast(title.value+'图片分类成功')
             getImageList(1)
             drawerRef.value.close()
         }).finally(()=>{
@@ -98,11 +100,10 @@ const formSubmit = ()=>{
 }
 
 const handleEdit = (item:object | any)=>{
+    editId.value = item.id
     form.name = item.name
     form.order = item.order
     editFlag.value = false
-    console.log(editFlag.value);
-    
     drawerRef.value.open()
 }
 

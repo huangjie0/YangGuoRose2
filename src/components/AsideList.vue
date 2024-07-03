@@ -3,18 +3,25 @@
         <span class="rose-text-overflow" :class="{'active' : active }">
             <slot></slot>
         </span>
-        <el-button class="rose-ml-a" text type="primary" size="small" @click="$emit('edit')">
-            <el-icon text :size="12"><Edit/></el-icon>
-        </el-button>
+        <CommonButton class="rose-ml-a" @clickButton="$emit('edit')">
+            <template #icon>
+                <el-icon text :size="12"><Edit/></el-icon>
+            </template>
+        </CommonButton>
         <CommPopconfirm title="是否要删除该分类?" @handleConfirm="$emit('delete')">
-            <el-button type="danger" size="small">
-                <el-icon :size="12"><Close/></el-icon>
-            </el-button>  
+            <template #button>     
+                <CommonButton type="danger">
+                    <template #icon> 
+                        <el-icon :size="12"><Close/></el-icon>
+                    </template>
+                </CommonButton>
+            </template>
         </CommPopconfirm>
     </div>
 </template>
 <script setup lang="ts"> 
 import CommPopconfirm from '@/components/CommPopconfirm.vue'
+import CommonButton from '@/components/CommonButton.vue'
 
 interface Params{
     active:boolean

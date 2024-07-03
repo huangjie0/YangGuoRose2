@@ -2,7 +2,11 @@
     <div>
         <el-container class="rose-bg-w rose-br-s1" :style="{ height:h + 'px' }">
             <el-header class="rose-header rose-f-row">
-                <el-button size="small" type="primary" @click="handleOpen">新增图片分类</el-button>
+                <CommonButton @clickButton="handleOpen">
+                    <template #container >
+                        新增图片分类
+                    </template>
+                </CommonButton>
             </el-header>
             <el-container>
                 <ImageAside ref="asideRef"></ImageAside>
@@ -13,6 +17,7 @@
 </template>
 <script setup lang="ts">
 import { ref } from 'vue';
+import CommonButton from '@/components/CommonButton.vue'
 import ImageAside from '@/components/ImageAside.vue'
 import ImageMain from '@/components/ImageMain.vue'
 

@@ -29,7 +29,11 @@
                     </el-input>
                 </el-form-item>
                 <el-form-item>
-                    <el-button type="primary" :loading="loading" @click="onSubmit(formRef)" class="rose-w-h-100">登录</el-button>
+                <CommonButton :loading="loading" class="rose-w-h-100" size="default">
+                    <template #container>
+                        登录
+                    </template>
+                </CommonButton>
                 </el-form-item>
             </el-form>
         </el-col>
@@ -37,6 +41,7 @@
 </template>
 <script lang="ts" setup>
 import { reactive,ref,onMounted,onBeforeUnmount } from 'vue'
+import CommonButton from '@/components/CommonButton.vue'
 import type { FormInstance, FormRules } from 'element-plus'
 import useUserStore from "@/store/index.ts";
 import { toast } from '@/composables/util.ts'

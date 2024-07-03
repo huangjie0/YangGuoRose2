@@ -7,14 +7,15 @@
                 </el-scrollbar>
             </div>
             <div class="actions rose-mt-a rose-f-row">
-                <el-button type="primary" @click="$emit('formSubmit')" :loading="loading">提交</el-button>
-                <el-button @click="close">取消</el-button>
+                <CommonButton @clickButton="$emit('formSubmit')" :loading="loading"><template #container>提交</template></CommonButton>
+                <CommonButton @clickButton="close" type="defalut"><template #container>取消</template></CommonButton>
             </div>
         </div>
     </el-drawer>
 </template>
 <script setup lang="ts">
 import { ref } from 'vue';
+import CommonButton from '@/components/CommonButton.vue';
 
 interface Params { 
     title:string;

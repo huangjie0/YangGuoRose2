@@ -4,6 +4,7 @@ import { Component } from 'vue';
      @click="$emit('clickButton')" :class="class">
     
         <slot name="icon"></slot>
+        <slot name="container"></slot>
     </el-button>
 </template>
 <script lang="ts" setup>

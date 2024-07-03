@@ -12,3 +12,7 @@ export function createImageClass(data:object){
 export function updateImageClass(id:number,data:object){
     return axios.post(`/admin/image_class/${id}`,data)
 }
+
+export function deleteImageClass(id:number){
+    return axios.post(`/admin/image_class/${id}/delete`)
+}

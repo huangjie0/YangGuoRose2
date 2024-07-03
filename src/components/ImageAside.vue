@@ -2,7 +2,8 @@
     <el-aside width="200px" class="rose-aside rose-p-r" v-loading="loading">
         <div class="rose-aside-top rose-p-a-0">
             <el-scrollbar>
-                <AsideList :active="activeId == item.id" v-for="(item,index) in imageList" :key="index" @edit="handleEdit(item)">{{ item.name }}</AsideList>
+                <AsideList :active="activeId == item.id" v-for="(item,index) in imageList" :key="index" 
+                @edit="handleEdit(item)" @delete="handleDelete(item)">{{ item.name }}</AsideList>
             </el-scrollbar>
         </div>
         <div class="rose-aside-bottom rose-p-a-02 rose-f-c">
@@ -99,12 +100,16 @@ const formSubmit = ()=>{
     })
 }
 
-const handleEdit = (item:object | any)=>{
+const handleEdit = (item:any)=>{
     editId.value = item.id
     form.name = item.name
     form.order = item.order
     editFlag.value = false
     drawerRef.value.open()
+}
+
+const handleDelete = (item:any)=>{
+    console.log(item);
 }
 
 defineExpose({

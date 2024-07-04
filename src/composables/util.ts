@@ -1,7 +1,7 @@
 import { ElNotification , ElMessageBox } from 'element-plus'
 import  nprogress from "nprogress"
 
-export function toast ( message:string='请求失败', type:any='success', duration:number=4000, dangerouslyUseHTMLString:boolean=false){
+export function toast ( message:string='请求失败', type:any='success', duration:number=4000, dangerouslyUseHTMLString:boolean=true){
     ElNotification({
         message,
         type,

@@ -23,7 +23,7 @@
 </template>
 <script setup lang="ts">
 import { ref,reactive,watch } from 'vue';
-import { getImageClassList,createImageClass,updateImageClass } from '@/api/imageClass.ts'
+import { getImageClassList,createImageClass,updateImageClass,deleteImageClass } from '@/api/imageClass.ts'
 import { toast } from '@/composables/util.ts'
 import AsideList from '@/components/AsideList.vue'
 import CommonDrawer from '@/components/CommonDrawer.vue'
@@ -109,7 +109,13 @@ const handleEdit = (item:any)=>{
 }
 
 const handleDelete = (item:any)=>{
-    console.log(item);
+    loading.value = true
+    deleteImageClass(item.id).then(()=>{
+        toast("删除成功")
+        getImageList()
+    }).finally(()=>{
+        loading.value = false
+    })
 }
 
 defineExpose({

@@ -18,6 +18,7 @@
     "less": "^4.2.0",
     "less-loader": "^12.2.0",
     "lib-flexible-computer": "^1.0.2",
+    "lms-design-ui": "^0.7.1",
     "nprogress": "^0.2.0",
     "pinia": "^2.1.7",
     "postcss-px2rem": "^0.3.0",

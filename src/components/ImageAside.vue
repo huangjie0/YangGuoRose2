@@ -3,7 +3,7 @@
         <div class="rose-aside-top rose-p-a-0">
             <el-scrollbar>
                 <AsideList :active="activeId == item.id" v-for="(item,index) in imageList" :key="index" 
-                @edit="handleEdit(item)" @delete="handleDelete(item)">{{ item.name }}</AsideList>
+                @edit="handleEdit(item)" @delete="handleDelete(item)" @click="handleChangeId(item.id)">{{ item.name }}</AsideList>
             </el-scrollbar>
         </div>
         <div class="rose-aside-bottom rose-p-a-02 rose-f-c">
@@ -28,6 +28,7 @@ import { toast } from '@/composables/util.ts'
 import AsideList from '@/components/AsideList.vue'
 import CommonDrawer from '@/components/CommonDrawer.vue'
 import type { FormRules } from 'element-plus'
+import { number } from 'echarts';
 
 const loading = ref(false)
 const imageList = ref<any[]>([])
@@ -77,7 +78,7 @@ const getImageList = (p:any = null)=>{
         total.value = res.totalCount
         
         let item = imageList.value[0]
-        item && (activeId.value = item.id)
+        item && handleChangeId(item.id)
     }).finally(()=>{
         loading.value = false
     })
@@ -118,12 +119,20 @@ const handleDelete = (item:any)=>{
     })
 }
 
+
 defineExpose({
     drawerRef,
     form,
     editFlag,
     formRef
 })
+
+const handleChangeId = (id:number)=>{
+    activeId.value = id
+    emits('change',id)
+}
+
+const emits = defineEmits(['change'])
 
 </script>
 <style lang="less" scoped>

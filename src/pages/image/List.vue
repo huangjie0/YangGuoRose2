@@ -9,8 +9,8 @@
                 </CommonButton>
             </el-header>
             <el-container>
-                <ImageAside ref="asideRef"></ImageAside>
-                <ImageMain></ImageMain>
+                <ImageAside ref="asideRef" @change="changeId"></ImageAside>
+                <ImageMain ref="imageMainRef"></ImageMain>
             </el-container>
         </el-container>
     </div>
@@ -24,6 +24,7 @@ import ImageMain from '@/components/ImageMain.vue'
 const windowHeight:any = window.innerHeight || document.body.clientHeight;
 const h:number = windowHeight - 144;
 const asideRef = ref<any>(null);
+const imageMainRef = ref<any>(null)
 
 const handleOpen = ()=>{
     asideRef.value.form.name = ''
@@ -31,6 +32,10 @@ const handleOpen = ()=>{
     asideRef.value.drawerRef.open()
     asideRef.value.formRef?.clearValidate()
     asideRef.value.editFlag = true
+}
+
+const changeId =  (id:number)=>{
+    imageMainRef.value.loadData(id)
 }
 
 

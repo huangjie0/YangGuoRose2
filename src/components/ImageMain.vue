@@ -2,9 +2,17 @@
   <el-main class="rose-p-r" v-loading="loading">
     <div class="rose-main-top rose-p-a-0">
         <el-scrollbar>
-            <div v-for="i in 1000" :key="i">
-              {{ i }}
-            </div>
+           <el-row :gutter="20">
+              <el-col v-for="(item,index) in imageData" :key="index" :span="4">
+                <el-card shadow="always" class="rose-p-r">
+                    <el-image :src="item.url" fit="cover"></el-image>
+                    <div>{{ item.name }}</div>
+                    <!-- <div> 
+                      <CommonButton text></CommonButton>
+                    </div> -->
+                </el-card>
+              </el-col>
+           </el-row>
         </el-scrollbar>
         </div>
         <div class="rose-main-bottom rose-p-a-02 rose-f-c">
@@ -17,7 +25,7 @@
             :height="660"
             :defaultSort="defaultSort"
             :pageData="pageData"
-            :config="tableConfig"
+            :config="tableConfig"s
             emptyText="暂无数据"
             stripe
             border
@@ -35,6 +43,7 @@
 </template>
 <script setup lang="ts">
 import { ref } from 'vue'
+import CommonButton from '@/components/CommonButton.vue'
 // import axios from 'axios'
 // import EncapTable from '@/components/EncapTable/EncapTable.vue';
 // import { ElConfigProvider } from 'element-plus'
@@ -42,7 +51,7 @@ import { ref } from 'vue'
 import { getImageList } from '@/api/image.ts'; 
 
 const loading = ref(false)
-const imageData = ref([]) 
+const imageData = ref<any[]>([]) 
 const imageClassId = ref(0)
 
 //分页
@@ -58,6 +67,8 @@ const getImage = (p:any = null)=>{
     getImageList(imageClassId.value,currentPage.value).then((res:any)=>{
         imageData.value = res.list
         total.value = res.totalCount
+        console.log(imageData.value);
+        
     }).finally(()=>{
         loading.value = false
     })
@@ -222,6 +233,10 @@ defineExpose({
 
 </script>
 <style lang="less" scoped>
+.el-image{
+  width: 100%;
+  height: 150px;
+}
 .rose-main{
     &-top{
         bottom: var(--common-split8);

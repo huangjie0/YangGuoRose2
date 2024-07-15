@@ -28,7 +28,6 @@ import { toast } from '@/composables/util.ts'
 import AsideList from '@/components/AsideList.vue'
 import CommonDrawer from '@/components/CommonDrawer.vue'
 import type { FormRules } from 'element-plus'
-import { number } from 'echarts';
 
 const loading = ref(false)
 const imageList = ref<any[]>([])
